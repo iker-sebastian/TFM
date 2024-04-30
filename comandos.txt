@@ -1,0 +1,17 @@
+--- Entornos virtuales ---
+conda create --name TFM python=3			# crear entorno con Python
+conda activate TFM							# entrar en el entorno TFM
+conda deactivate 							# salir del entorno
+conda env remove --name TFM					# eliminar entorno virtual
+conda enviroments 							# ver entornos
+--- Paquetes ---
+conda list									# ver paquetes instalados
+pip install paquete							# instalar paquete
+
+
+UBUNTU
+sudo python3 -m venv env_TFM
+source env_TFM/bin/activate
+
+REQUIREMENTS
+pip install -r requirements.txt
