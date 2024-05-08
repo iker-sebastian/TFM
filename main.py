@@ -30,9 +30,9 @@ for meterId in config.array_meterId_unicos:
     # Recorrer todos los años y meses de ese meter_Id
     for year_month in config.array_year_month:
         # Recorrer todos los dias de la semana de ese mes y año de ese meter_Id
-        for dia in config.dia_semana:
-            # Llamada a la API FLOWS
-            RD_trafico_flows.API_flows(meterId, year_month, dia)
+        #for dia in config.dia_semana:
+        # Llamada a la API FLOWS
+        RD_trafico_flows.API_flows(meterId, year_month)
 
 # Aplicar la API_calidad_aire para cada provincia
 for provincia in config.array_provincia:

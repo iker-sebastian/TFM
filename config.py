@@ -2,11 +2,11 @@
 import datetime
 
 # Setting de fechas
-fecha_hoy =  datetime.date.today()
-fecha_inicial = datetime.date(2024, 4, 20)
+fecha_hoy =  datetime.date(2024, 5, 1) #datetime.date.today()
+fecha_inicial = datetime.date(2024, 1, 1)
 fecha_recorrida = fecha_inicial
 fecha_completa = ''
-dia_semana = [1, 2, 3, 4, 5, 6, 7]
+#dia_semana = [1, 2, 3, 4, 5, 6, 7]
 
 def Fecha_Setting(fecha_recorrida):
     # Definir variables 'year', 'month' y 'day'

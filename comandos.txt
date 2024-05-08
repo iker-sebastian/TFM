@@ -3,7 +3,7 @@ conda create --name TFM python=3			# crear entorno con Python
 conda activate TFM							# entrar en el entorno TFM
 conda deactivate 							# salir del entorno
 conda env remove --name TFM					# eliminar entorno virtual
-conda enviroments 							# ver entornos
+conda env list 							    # ver entornos
 --- Paquetes ---
 conda list									# ver paquetes instalados
 pip install paquete							# instalar paquete
