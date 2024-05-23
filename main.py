@@ -13,7 +13,7 @@ import bdd
 config.Year_Month_Setting(config.fecha_inicial, config.fecha_hoy)
 
 # -------------------------------------------- OBTENER METER_ID ------------------------------------------------ #
-
+'''
 # Llamada a la API para obtener el numero de paginas de la API meter_Id
 pags_totales = RD_trafico_flows.API_meterId_pags()
 
@@ -29,10 +29,8 @@ for meterId in config.array_meterId_unicos:
     print(meterId)
     # Recorrer todos los años y meses de ese meter_Id
     for year_month in config.array_year_month:
-        # Recorrer todos los dias de la semana de ese mes y año de ese meter_Id
-        #for dia in config.dia_semana:
         # Llamada a la API FLOWS
-        RD_trafico_flows.API_flows(meterId, year_month)
+        RD_trafico_flows.API_flows(meterId, year_month)'''
 
 # Aplicar la API_calidad_aire para cada provincia
 for provincia in config.array_provincia:
@@ -81,10 +79,16 @@ while config.fecha_recorrida <= config.fecha_hoy:
     # Dia siguiente
     config.fecha_recorrida += datetime.timedelta(days=1)
 
+# ------------------------------------ UNIFICAR FLOW POR DIA Y METERID --------------------------------------- # 
+
+# Función que unifica los flows por meterId y dia
+RD_trafico_flows.unificar_Flows()
+
 # -------------------------------------------- INSERCION BDD ------------------------------------------------ # 
      
 # Insercion flows
-for doc in config.array_dic_flows:
+for doc in config.array_dic_flows_unificados:
+    print(doc)
     # Actualiza el documento si existe '_id', si no inserta datos
     bdd.coleccion_trafico_flows.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
     

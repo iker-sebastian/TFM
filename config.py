@@ -29,6 +29,7 @@ def Year_Month_Setting(inicio, fin):
 array_year_month = [] # Array que guarda arrays de los años y meses
 array_meterId = [] # Array donde se almacenan los valores meterId obtenidos de la API meterID
 array_meterId_unicos = [] # array_meterId pero de valores unicos
+diccionario_unificar_flows = dict() # Diccionario para unificar los flows por MeterId y dia
 array_provincia = [1, 48, 20] # Setting de provincia (codigo)
 array_estaciones = [] # Array que guarda las estaciones de euskalmet
 array_estaciones_unicos = [] # array_estaciones pero de valores unicos (snapshot mas reciente)
@@ -38,6 +39,7 @@ array_mediciones = [['measuresForAir','humidity'], ['measuresForAir','temperatur
 
 # Arrays con diccionarios
 array_dic_flows = [] # Array donde se almacenan los diccionarios que contienen datos de flows
+array_dic_flows_unificados = [] # Array donde se almacenan los diccionarios que contienen datos de flows (uno por dia y meterId)
 array_dic_incidencias = [] # Array donde se almacenan los diccionarios que contienen datos de incidencias
 array_dic_meteo_cal_aire = [] # Array donde se almacenan los diccionarios que contienen datos de la calidad del aire
 array_dic_estaciones = [] # Array donde se almacenan los diccionarios que contienen datos de las estaciones de euskalmet

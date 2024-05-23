@@ -42,7 +42,6 @@ def API_meterId():
 def API_flows(meterId, year_month):
     # API de flows
     url_flows = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/{year_month[1]}/byMeter/{meterId}'
-    #f'https://api.euskadi.eus/traffic/v1.0/flows/byMonth/{year_month[0]}/{year_month[1]}/byMeter/{meterId}/byDayOfWeek/{dia_sem}'
     # Excepción en caso de perdida de conexión
     try:
         # Solcitud
@@ -63,8 +62,6 @@ def API_flows(meterId, year_month):
                         'fecha': documento['meterDate'],
                         'año': year_month[0],
                         'mes': year_month[1],
-                        #'dia_de_la_semana': dia_sem,
-                        'intervalo_tiempo': documento['timeRank'],
                         'vel_media': velocidad_media,
                         'vehiculos': documento['totalVehicles']
                     }
@@ -77,4 +74,41 @@ def API_flows(meterId, year_month):
         print(f"Error de comunicación! Estos son los datos: [meterId: {meterId} y fecha: {year_month}")
     except requests.exceptions.Timeout:
         print(f"Error de comunicación! Estos son los datos: [meterId: {meterId} y fecha: {year_month}")
+
+# Metodo que llama a la API FLOWS y devuelve datos de flows de un mes, con un meterId y en un dia de la semana en concreto
+def unificar_Flows():
+    for doc in config.array_dic_flows:
+        key = (doc['meterId'], doc['fecha'])
+        config.diccionario_unificar_flows[key].append(doc)
+    
+    for documentos_agrupados in config.diccionario_unificar_flows.items():
+        if len(documentos_agrupados) == 1:
+            doc_update = {
+                '_id': documentos_agrupados[0]['meterId'] + '_' + documentos_agrupados[0]['fecha'],
+                'meterId': documentos_agrupados[0]['meterId'],
+                'source': documentos_agrupados[0]['source'],
+                'fecha': documentos_agrupados[0]['fecha'],
+                'año': documentos_agrupados[0]['año'],
+                'mes': documentos_agrupados[0]['mes'],
+                'vel_media': documentos_agrupados[0]['vel_media'],
+                'vehiculos': documentos_agrupados[0]['vehiculos']
+            }
+        else:
+            sum_vel_media = sum(doc['vel_media'] for doc in documentos_agrupados)
+            sum_vehiculos = sum(doc['vehiculos'] for doc in documentos_agrupados)
+            num_docs_agrupados = len(documentos_agrupados)
+            prom_vel_media = int(sum_vel_media/num_docs_agrupados)
+
+            doc_update = {
+                '_id': doc['meterId'] + '_' + doc['fecha'],
+                'meterId': documentos_agrupados[0]['meterId'],
+                'source': documentos_agrupados[0]['source'],
+                'fecha': documentos_agrupados[0]['fecha'],
+                'año': documentos_agrupados[0]['año'],
+                'mes': documentos_agrupados[0]['mes'],
+                'vel_media': prom_vel_media,
+                'vehiculos': sum_vehiculos
+            }
+        config.array_dic_flows_unificados.append(doc_update)
+    return config.array_dic_flows_unificados
         
