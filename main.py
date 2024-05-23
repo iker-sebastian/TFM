@@ -13,7 +13,7 @@ import bdd
 config.Year_Month_Setting(config.fecha_inicial, config.fecha_hoy)
 
 # -------------------------------------------- OBTENER METER_ID ------------------------------------------------ #
-'''
+
 # Llamada a la API para obtener el numero de paginas de la API meter_Id
 pags_totales = RD_trafico_flows.API_meterId_pags()
 
@@ -30,7 +30,7 @@ for meterId in config.array_meterId_unicos:
     # Recorrer todos los años y meses de ese meter_Id
     for year_month in config.array_year_month:
         # Llamada a la API FLOWS
-        RD_trafico_flows.API_flows(meterId, year_month)'''
+        RD_trafico_flows.API_flows(meterId, year_month)
 
 # Aplicar la API_calidad_aire para cada provincia
 for provincia in config.array_provincia:
