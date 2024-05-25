@@ -3,7 +3,7 @@ import datetime
 
 # Setting de fechas
 fecha_hoy =  datetime.date(2024, 5, 1) #datetime.date.today()
-fecha_inicial = datetime.date(2023, 4, 1)
+fecha_inicial = datetime.date(2023, 3, 1)
 fecha_recorrida = fecha_inicial
 fecha_completa = ''
 #dia_semana = [1, 2, 3, 4, 5, 6, 7]
