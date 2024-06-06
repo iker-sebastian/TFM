@@ -1,6 +1,6 @@
 # Imports
 import requests
-import config
+import config_2024
 import time
 
 # Metodo que llama a la API meterId y devuelve las paginas de la respuesta
@@ -20,7 +20,7 @@ def API_meterId_pags():
 # Metodo que llama a la API meterId y devuelve los valores meterId    
 def API_meterId():
     # API de meterId
-    url_meterId = f'https://api.euskadi.eus/traffic/v1.0/meters?_page={config.num_pag_meter}'
+    url_meterId = f'https://api.euskadi.eus/traffic/v1.0/meters?_page={config_2024.num_pag_meter}'
     # Solcitud
     data = requests.get(url_meterId)
     # Respuesta OK
@@ -34,9 +34,9 @@ def API_meterId():
             # Guardar meterId
             meterId = feature['properties']['meterId']
             # Añade el meterId a un array
-            config.array_meterId.append(int(meterId))
+            config_2024.array_meterId.append(int(meterId))
     else:
-        config.cont_NO_200_trafico_meterId += 1
+        config_2024.cont_NO_200_trafico_meterId += 1
 
 
 # Metodo que llama a la API FLOWS y devuelve datos de flows de un mes, con un meterId y en un dia de la semana en concreto
@@ -44,7 +44,7 @@ def API_flows(meterId, year_month):
     # API de flows
     url_flows = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/{year_month[1]}/byMeter/{meterId}'
     # En caso de fallo un par de intentos adicionales
-    for intento in range(config.intentos):
+    for intento in range(config_2024.intentos):
         # Excepción en caso de perdida de conexión
         try:
             # Solcitud
@@ -69,15 +69,15 @@ def API_flows(meterId, year_month):
                             'vehiculos': documento['totalVehicles']
                         }
                     # Añade el diccionario a un array
-                    config.array_dic_flows.append(doc)
+                    config_2024.array_dic_flows.append(doc)
             else:
-                config.cont_NO_200_trafico_flows += 1
+                config_2024.cont_NO_200_trafico_flows += 1
         # Segunda parte de la excepción
         except requests.exceptions.ConnectionError:
             print(f"Error de comunicación! Estos son los datos: [meterId: {meterId} y fecha: {year_month}")
         except requests.exceptions.ReadTimeout:
             print(f"Tiempo de espera agotado. Intento {intento + 1}. Se reintentará...")
-            if intento < config.intentos -1:
+            if intento < config_2024.intentos -1:
                 time.sleep(5)
             else:
                 print("El tiempo de espera se agotó definitivamente")
@@ -85,11 +85,11 @@ def API_flows(meterId, year_month):
 
 # Metodo que llama a la API FLOWS y devuelve datos de flows de un mes, con un meterId y en un dia de la semana en concreto
 def unificar_Flows():
-    for doc in config.array_dic_flows:
+    for doc in config_2024.array_dic_flows:
         key = (doc['meterId'], doc['fecha'])
-        config.diccionario_unificar_flows[key].append(doc)
+        config_2024.diccionario_unificar_flows[key].append(doc)
     
-    for documentos_agrupados in config.diccionario_unificar_flows.items():
+    for documentos_agrupados in config_2024.diccionario_unificar_flows.items():
         if len(documentos_agrupados) == 1:
             doc_update = {
                 '_id': documentos_agrupados[0]['meterId'] + '_' + documentos_agrupados[0]['fecha'],
@@ -117,6 +117,6 @@ def unificar_Flows():
                 'vel_media': prom_vel_media,
                 'vehiculos': sum_vehiculos
             }
-        config.array_dic_flows_unificados.append(doc_update)
-    return config.array_dic_flows_unificados
+        config_2024.array_dic_flows_unificados.append(doc_update)
+    return config_2024.array_dic_flows_unificados
         

@@ -1,7 +1,7 @@
 # Imports
 import requests
-import config
-import token_jwt_euskalmet
+import config_2024
+import token_jwt_euskalmet_2024
 
 def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
     # API de Euskalmet para obtener datos
@@ -9,7 +9,7 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
     # Excepción en caso de perdida de conexión
     try:
         # Solcitud
-        data = requests.get(url_datos, headers=token_jwt_euskalmet.headers)
+        data = requests.get(url_datos, headers=token_jwt_euskalmet_2024.headers)
         # Respuesta OK
         if data.status_code == 200:
             # Formatear respuesta a json
@@ -36,10 +36,10 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
                     'total': data['mean']
             }
             # Añade el diccionario a un array
-            config.array_dic_datos_meteo.append(doc)
+            config_2024.array_dic_datos_meteo.append(doc)
             print(doc)
         else:
-            config.cont_NO_200_meteo_datos += 1
+            config_2024.cont_NO_200_meteo_datos += 1
     # Segunda parte de la excepción
     except requests.exceptions.ConnectionError:
         print(f"Error de comunicación! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]")
