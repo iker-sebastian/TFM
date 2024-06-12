@@ -37,7 +37,6 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             }
             # Añade el diccionario a un array
             config_2024.array_dic_datos_meteo.append(doc)
-            print(doc)
         else:
             config_2024.cont_NO_200_meteo_datos += 1
     # Segunda parte de la excepción

@@ -37,9 +37,8 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             }
             # Añade el diccionario a un array
             config.array_dic_datos_meteo.append(doc)
-            print(doc)
         else:
             config.cont_NO_200_meteo_datos += 1
     # Segunda parte de la excepción
     except requests.exceptions.ConnectionError:
-        print(f"Error de comunicación! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]")
+        print(f'Error de comunicación! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]')

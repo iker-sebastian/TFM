@@ -2,7 +2,7 @@
 import requests
 import config
 
-# Metodo que llama a la API de calidad del aire
+# Datos de calidad del aire
 def API_calidad_aire(prov, inicio, fin):
     # API calidad del aire
     url_cal_aire = f'https://api.euskadi.eus/air-quality/measurements/daily/counties/{prov}/from/{inicio}/to/{fin}'

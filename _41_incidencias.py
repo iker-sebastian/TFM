@@ -16,7 +16,7 @@ def API_incidencias(year, month, day):
         data_incidencias = data['incidences']
         for documento in data_incidencias:
             cityTown = documento.get('cityTown', 'road')
-            causa = documento.get('cause', 'Unkown cause')
+            causa = documento.get('cause', 'Unknown cause')
             # Creo un diccionario con los datos que me interesan
             doc = {
                 '_id': documento['incidenceId'],

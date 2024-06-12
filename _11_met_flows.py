@@ -3,7 +3,7 @@ import requests
 import config
 import time
 
-# Metodo que llama a la API meterId y devuelve las paginas de la respuesta
+# Paginas meter_Id
 def API_meterId_pags():
     # API de meterId
     url_meterId_pags = f'https://api.euskadi.eus/traffic/v1.0/meters'
@@ -17,7 +17,7 @@ def API_meterId_pags():
         data_totalPages = data['totalPages']
         return data_totalPages
 
-# Metodo que llama a la API meterId y devuelve los valores meterId    
+# Valores meter_Id    
 def API_meterId():
     # API de meterId
     url_meterId = f'https://api.euskadi.eus/traffic/v1.0/meters?_page={config.num_pag_meter}'
@@ -39,7 +39,7 @@ def API_meterId():
         config.cont_NO_200_trafico_meterId += 1
 
 
-# Metodo que llama a la API FLOWS y devuelve datos de flows de un mes, con un meterId y en un dia de la semana en concreto
+# Datos de flows de un mes con un meterId
 def API_flows(meterId, year_month):
     # API de flows
     url_flows = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/{year_month[1]}/byMeter/{meterId}'
@@ -74,22 +74,23 @@ def API_flows(meterId, year_month):
                 config.cont_NO_200_trafico_flows += 1
         # Segunda parte de la excepción
         except requests.exceptions.ConnectionError:
-            print(f"Error de comunicación! Estos son los datos: [meterId: {meterId} y fecha: {year_month}")
+            print(f'Error de comunicación! Estos son los datos: [meterId: {meterId} y fecha: {year_month}')
         except requests.exceptions.ReadTimeout:
-            print(f"Tiempo de espera agotado. Intento {intento + 1}. Se reintentará...")
+            print(f'Tiempo de espera agotado. Intento {intento + 1}. Se reintentará...')
             if intento < config.intentos -1:
                 time.sleep(5)
             else:
-                print("El tiempo de espera se agotó definitivamente")
+                print('El tiempo de espera se agotó definitivamente')
         intento = 0
 
-# Metodo que llama a la API FLOWS y devuelve datos de flows de un mes, con un meterId y en un dia de la semana en concreto
+# Obtener un unico registro por día
 def unificar_Flows():
     for doc in config.array_dic_flows:
         key = (doc['meterId'], doc['fecha'])
         config.diccionario_unificar_flows[key].append(doc)
     
     for documentos_agrupados in config.diccionario_unificar_flows.items():
+        # Unico registro para la fecha
         if len(documentos_agrupados) == 1:
             doc_update = {
                 '_id': documentos_agrupados[0]['meterId'] + '_' + documentos_agrupados[0]['fecha'],
@@ -101,7 +102,9 @@ def unificar_Flows():
                 'vel_media': documentos_agrupados[0]['vel_media'],
                 'vehiculos': documentos_agrupados[0]['vehiculos']
             }
+        # Mas de un registro para la fecha
         else:
+            # Calculo de velocidad media y numero de vehiculos
             sum_vel_media = sum(doc['vel_media'] for doc in documentos_agrupados)
             sum_vehiculos = sum(doc['vehiculos'] for doc in documentos_agrupados)
             num_docs_agrupados = len(documentos_agrupados)

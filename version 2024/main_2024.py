@@ -13,7 +13,6 @@ import bdd_2024
 config_2024.Year_Month_Setting(config_2024.fecha_inicial, config_2024.fecha_hoy)
 
 # -------------------------------------------- OBTENER METER_ID ------------------------------------------------ #
-'''
 # Llamada a la API para obtener el numero de paginas de la API meter_Id
 pags_totales = RD_trafico_flows_2024.API_meterId_pags()
 
@@ -31,14 +30,14 @@ for meterId in config_2024.array_meterId_unicos:
     for year_month in config_2024.array_year_month:
         # Llamada a la API FLOWS
         RD_trafico_flows_2024.API_flows(meterId, year_month)
-'''
+
 # Aplicar la API_calidad_aire para cada provincia
 for provincia in config_2024.array_provincia:
     # Llamada a la API CALIDAD AIRE
     RD_meteo_calidad_aire_2024.API_calidad_aire(provincia, config_2024.fecha_inicial, config_2024.fecha_hoy)
 
 # ------------------------------------ UNIFICAR FLOW POR DIA Y METERID --------------------------------------- # 
-'''
+
 # Función que unifica los flows por meterId y dia
 RD_trafico_flows_2024.unificar_Flows()
 
@@ -53,7 +52,7 @@ for doc in config_2024.array_dic_flows_unificados:
 # Insercion incidencias
 for doc in config_2024.array_dic_incidencias:
     # Actualiza el documento si existe '_id', si no inserta datos
-    bdd_2024.coleccion_trafico_incidencias.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)'''
+    bdd_2024.coleccion_trafico_incidencias.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
 
 # -------------------------------------------- OBTENER ESTACIONES ------------------------------------------------ #
 

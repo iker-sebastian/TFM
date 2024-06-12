@@ -3,7 +3,7 @@ import requests
 import config
 import token_jwt_euskalmet
 
-# Metodo que devuelve el snapshot y la estacion
+# Devuelve el snapshot y la estacion
 def GET_snaphot(cadena):
     # Se establece el separador
     particion = cadena.split('/')
@@ -12,7 +12,7 @@ def GET_snaphot(cadena):
     snap = particion[3]
     return est, snap
 
-# Metodo que devuelve el sensor del sensorkey
+#Devuelve el sensor del sensorkey
 def GET_sensorkey(cadena):
     # Se establece el separador
     particion = cadena.split('/')
@@ -20,7 +20,7 @@ def GET_sensorkey(cadena):
     sensor = particion[2]
     return sensor
 
-# Metodo que llama a la API que facilita todas las estaciones de Euskalmet
+# Estaciones de Euskalmet
 def API_estaciones():
     # API de estaciones Euskalmet
     url_estaciones = 'https://api.euskadi.eus/euskalmet/stations'
@@ -38,6 +38,7 @@ def API_estaciones():
     else:
         config.cont_NO_200_meteo_estaciones += 1
 
+# Datos de las estaciones meteorlogicas segun snapshot
 def API_estaciones_snapshot(est, snap):
     # API de valores estacion Euskalmet en snapshot
     url_estaciones_snapshot = f'https://api.euskadi.eus/euskalmet/stations/{est}/{snap}'
