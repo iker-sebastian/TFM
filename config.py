@@ -1,9 +1,10 @@
 # Imports
 import datetime
+import bdd
 
 # Setting de fechas
 fecha_hoy =  datetime.date(2024, 6, 1) #datetime.date.today()
-fecha_inicial = datetime.date(2024, 4, 1)
+fecha_inicial = datetime.date(2024, 1, 1)
 fecha_recorrida = fecha_inicial
 fecha_completa = ''
 
@@ -46,17 +47,14 @@ array_dic_estaciones = [] # Array donde se almacenan los diccionarios que contie
 array_dic_datos_meteo = [] # Array donde se almacenan los diccionarios que contienen datos de euskalmet
 
 # Iteradores
+contador_pags = 1
 num_pag_meter = 1
+num_pag_flows = 1
 intentos = 3
-# Contadores de fallos
-cont_NO_200_meteo_datos = 0
-cont_NO_200_trafico_incidencias = 0
-cont_NO_200_meteo_calidad_aire = 0
-cont_NO_200_meteo_estaciones_snapshot = 0
-cont_NO_200_meteo_estaciones = 0
-cont_NO_200_trafico_meterId = 0
-cont_NO_200_trafico_flows = 0
+temporal = 0
 
+id_inc = 1
+id_met = 1
 
 
 

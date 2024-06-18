@@ -10,7 +10,7 @@ def ejecutar(archivo_python):
 # Definir script
 if __name__ == "__main__":
     # Lista de scripts
-    scripts = ["_10_flows.py", "_20_calidad_aire.py", "_30_est_meteorologicas.py", "_40_bucle_con_fechas.py"]
+    scripts = ["_10_flows.py", "_20_calidad_aire.py", "_30_est_meteorologicas.py"]
 
     # Creamos un proceso para cada archivo
     procesos = []

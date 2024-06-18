@@ -22,7 +22,7 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             # Creo un diccionario con los datos que me interesan
             doc = {
                     '_id': str(year) + str(month) + str(day) + '_' + medida + '_' + estacion + '_' + sensor,
-                    'anyo': year,
+                    'año': year,
                     'mes': month,
                     'dia': day,
                     'estacion': estacion,
@@ -37,8 +37,10 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             }
             # Añade el diccionario a un array
             config.array_dic_datos_meteo.append(doc)
+            print(f"met_{config.id_met}")
+            config.id_met += 1
         else:
-            config.cont_NO_200_meteo_datos += 1
+            print("Error en la solicitud de la API")
     # Segunda parte de la excepción
     except requests.exceptions.ConnectionError:
         print(f'Error de comunicación! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]')
