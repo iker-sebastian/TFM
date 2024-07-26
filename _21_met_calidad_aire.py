@@ -37,7 +37,7 @@ def API_calidad_aire(prov, inicio, fin):
                         # Añade el diccionario a un array
                         config.array_dic_meteo_cal_aire.append(doc)
             else:
-                print("Error en la solicitud de la API")
+                print('Error en la solicitud de la API')
 
         # Excepción de conexión
         except requests.exceptions.ConnectionError:

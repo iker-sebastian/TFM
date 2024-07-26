@@ -37,11 +37,11 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             }
             # Añadir el diccionario a un array
             config.array_dic_datos_meteo.append(doc)
-            print(f"met_{config.id_met}")
+            print(f'met_{config.id_met}')
             config.id_met += 1
         #else:
             # Se comenta el print por tema de tiempos de ejecución
-            #print("Error en la solicitud de la API de meteorología")
+            #print('Error en la solicitud de la API de meteorología')
     # Segunda parte de la excepción
     except requests.exceptions.ConnectionError:
         print(f'Error de comunicación! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]')

@@ -36,7 +36,7 @@ def API_estaciones():
             # Añadir estaciones a array
             config.array_estaciones.append([est_id, snapshot])
     else:
-        print("Error en la solicitud de la API de estaciones")
+        print('Error en la solicitud de la API de estaciones')
 
 # Datos de las estaciones meteorlogicas segun snapshot
 def API_estaciones_snapshot(est, snap):
@@ -67,4 +67,4 @@ def API_estaciones_snapshot(est, snap):
         # Añade el diccionario a un array
         config.array_dic_estaciones.append(doc)
     else:
-        print("Error en la solicitud de la API de estaciones snapshot")
+        print('Error en la solicitud de la API de estaciones snapshot')

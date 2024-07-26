@@ -46,5 +46,5 @@ async def main():
         # Actualiza el documento si existe '_id', si no inserta datos
         bdd.coleccion_flows.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     asyncio.run(main())

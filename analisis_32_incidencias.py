@@ -62,7 +62,7 @@ def analisis_meteo():
         correlation_matrix = df_sin_textos.corr()
         # Estetica
         sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
-        plt.title(f'Matriz de Correlación {df}')
+        plt.title(f'Diagrama de Correlación para {df}')
         plt.show()
 
 

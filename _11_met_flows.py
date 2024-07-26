@@ -41,7 +41,7 @@ def API_meterId():
                     # Añade el meterId a un array
                     config.array_meterId.append(int(meterId))
             else:
-                print("Error en la solicitud de la API")
+                print('Error en la solicitud de la API')
 
         # Excepción de conexión
         except requests.exceptions.ConnectionError:
@@ -108,7 +108,7 @@ def API_flows(meter, year_month):
                     # Añade el diccionario a un array
                     config.array_dic_flows.append(doc)
             else:
-                print("Error en la solicitud de la API")
+                print('Error en la solicitud de la API')
             break
 
         # Excepción de conexión

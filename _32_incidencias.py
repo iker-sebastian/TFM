@@ -30,7 +30,7 @@ def API_incidencias(year, month, day):
             }
             # Añade el diccionario a un array
             config.array_dic_incidencias.append(doc)
-            print(f"inc_{config.id_inc}")
+            print(f'inc_{config.id_inc}')
             config.id_inc += 1
     else:
-        print("Error en la solicitud de la API de incidencias")
+        print('Error en la solicitud de la API de incidencias')

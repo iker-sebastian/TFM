@@ -13,10 +13,11 @@ from tensorflow.keras.layers import Dense, Dropout
 
 # Dataset
 dataset_calidad_aire = list(bdd.coleccion_calidad_aire.find())
-# Df
+# DF
 df_calidad_aire = pd.DataFrame(dataset_calidad_aire)
 
 def analisis_calidad_aire():
+    
     # Regresion lineal
     modelo_RL = LinearRegression()
 
@@ -26,7 +27,7 @@ def analisis_calidad_aire():
     modelo_RN.add(Dropout(0.1))
     modelo_RN.add(Dense(512, activation='relu'))
     modelo_RN.add(Dropout(0.1))
-    modelo_RN.add(Dense(1, activation="linear"))
+    modelo_RN.add(Dense(1, activation='linear'))
     # Compilar modelo
     modelo_RN.compile(optimizer='adam', loss='mse', metrics=['mae'])
     # Resumen del modelo
@@ -36,7 +37,7 @@ def analisis_calidad_aire():
     modelo_RF = RandomForestRegressor(n_estimators=128)
 
     # DF para eliminar los campos que no aportan información
-    df_numerico = df_calidad_aire.drop(columns=['_id', 'id_estacion', 'nombre', "unidad_medicion"])
+    df_numerico = df_calidad_aire.drop(columns=['_id', 'id_estacion', 'nombre', 'unidad_medicion'])
 
     # Borrar valores atipicos o erroneos
     df_numerico_clean = df_numerico.drop(df_numerico[df_numerico['SO2'] == -1].index)
@@ -83,10 +84,10 @@ def analisis_calidad_aire():
     r2_RF_Tolueno = r2_score(Y_Tolueno_test, prediccion_RF_Tolueno)
 
     # Impresion
-    print(f"Tolueno")
-    print(f"RL: {mse_RL_Tolueno} | {mae_RL_Tolueno} | {r2_RL_Tolueno}")
-    print(f"RN: {mse_RN_Tolueno} | {mae_RN_Tolueno} | {r2_RN_Tolueno}")
-    print(f"RF: {mse_RF_Tolueno} | {mae_RF_Tolueno} | {r2_RF_Tolueno}")
+    print(f'Tolueno')
+    print(f'RL: {mse_RL_Tolueno} | {mae_RL_Tolueno} | {r2_RL_Tolueno}')
+    print(f'RN: {mse_RN_Tolueno} | {mae_RN_Tolueno} | {r2_RN_Tolueno}')
+    print(f'RF: {mse_RF_Tolueno} | {mae_RF_Tolueno} | {r2_RF_Tolueno}')
 
 
     # PREDICCION SO2 #
@@ -124,10 +125,10 @@ def analisis_calidad_aire():
     r2_RF_SO2 = r2_score(Y_SO2_test, prediccion_RF_SO2)
 
     # Impresion
-    print(f"SO2")
-    print(f"RL: {mse_RL_SO2} | {mae_RL_SO2} | {r2_RL_SO2}")
-    print(f"RN: {mse_RN_SO2} | {mae_RN_SO2} | {r2_RN_SO2}")
-    print(f"RF: {mse_RF_SO2} | {mae_RF_SO2} | {r2_RF_SO2}")
+    print(f'SO2')
+    print(f'RL: {mse_RL_SO2} | {mae_RL_SO2} | {r2_RL_SO2}')
+    print(f'RN: {mse_RN_SO2} | {mae_RN_SO2} | {r2_RN_SO2}')
+    print(f'RF: {mse_RF_SO2} | {mae_RF_SO2} | {r2_RF_SO2}')
 
 
     # PREDICCION PM25 #
@@ -165,10 +166,10 @@ def analisis_calidad_aire():
     r2_RF_PM25 = r2_score(Y_PM25_test, prediccion_RF_PM25)
 
     # Impresion
-    print(f"PM2,5")
-    print(f"RL: {mse_RL_PM25} | {mae_RL_PM25} | {r2_RL_PM25}")
-    print(f"RN: {mse_RN_PM25} | {mae_RN_PM25} | {r2_RN_PM25}")
-    print(f"RF: {mse_RF_PM25} | {mae_RF_PM25} | {r2_RF_PM25}")
+    print(f'PM2,5')
+    print(f'RL: {mse_RL_PM25} | {mae_RL_PM25} | {r2_RL_PM25}')
+    print(f'RN: {mse_RN_PM25} | {mae_RN_PM25} | {r2_RN_PM25}')
+    print(f'RF: {mse_RF_PM25} | {mae_RF_PM25} | {r2_RF_PM25}')
 
 
     # PREDICCION PM10 #
@@ -206,10 +207,10 @@ def analisis_calidad_aire():
     r2_RF_PM10 = r2_score(Y_PM10_test, prediccion_RF_PM10)
 
     # Impresion
-    print(f"PM10")
-    print(f"RL: {mse_RL_PM10} | {mae_RL_PM10} | {r2_RL_PM10}")
-    print(f"RN: {mse_RN_PM10} | {mae_RN_PM10} | {r2_RN_PM10}")
-    print(f"RF: {mse_RF_PM10} | {mae_RF_PM10} | {r2_RF_PM10}")
+    print(f'PM10')
+    print(f'RL: {mse_RL_PM10} | {mae_RL_PM10} | {r2_RL_PM10}')
+    print(f'RN: {mse_RN_PM10} | {mae_RN_PM10} | {r2_RN_PM10}')
+    print(f'RF: {mse_RF_PM10} | {mae_RF_PM10} | {r2_RF_PM10}')
 
 
     # PREDICCION 03 8h #
@@ -247,10 +248,10 @@ def analisis_calidad_aire():
     r2_RF_03_8h = r2_score(Y_03_8h_test, prediccion_RF_03_8h)
 
     # Impresion
-    print(f"03 8h")
-    print(f"RL: {mse_RL_03_8h} | {mae_RL_03_8h} | {r2_RL_03_8h}")
-    print(f"RN: {mse_RN_03_8h} | {mae_RN_03_8h} | {r2_RN_03_8h}")
-    print(f"RF: {mse_RF_03_8h} | {mae_RF_03_8h} | {r2_RF_03_8h}")
+    print(f'03 8h')
+    print(f'RL: {mse_RL_03_8h} | {mae_RL_03_8h} | {r2_RL_03_8h}')
+    print(f'RN: {mse_RN_03_8h} | {mae_RN_03_8h} | {r2_RN_03_8h}')
+    print(f'RF: {mse_RF_03_8h} | {mae_RF_03_8h} | {r2_RF_03_8h}')
 
 
     # PREDICCION NOX #
@@ -288,7 +289,7 @@ def analisis_calidad_aire():
     r2_RF_NOX = r2_score(Y_NOX_test, prediccion_RF_NOX)
 
     # Impresion
-    print(f"NOX")
-    print(f"RL: {mse_RL_NOX} | {mae_RL_NOX} | {r2_RL_NOX}")
-    print(f"RN: {mse_RN_NOX} | {mae_RN_NOX} | {r2_RN_NOX}")
-    print(f"RF: {mse_RF_NOX} | {mae_RF_NOX} | {r2_RF_NOX}")
+    print(f'NOX')
+    print(f'RL: {mse_RL_NOX} | {mae_RL_NOX} | {r2_RL_NOX}')
+    print(f'RN: {mse_RN_NOX} | {mae_RN_NOX} | {r2_RN_NOX}')
+    print(f'RF: {mse_RF_NOX} | {mae_RF_NOX} | {r2_RF_NOX}')
