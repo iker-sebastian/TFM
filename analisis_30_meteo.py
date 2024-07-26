@@ -9,7 +9,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 
@@ -28,7 +27,6 @@ df_velocidad_media_viento = df_meteo[df_meteo['medida'] == 'mean_speed']
 df_direccion_viento = df_meteo[df_meteo['medida'] == 'direction_sigma']
 
 def analisis_meteo():
-
     # Regresion lineal
     modelo_RL = LinearRegression()
 

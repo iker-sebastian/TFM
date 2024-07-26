@@ -11,7 +11,6 @@ dataset_flows = list(bdd.coleccion_flows.find())
 df_flows = pd.DataFrame(dataset_flows)
 
 def analisis_flows():
-    
     # Columna a agrupar por clusteres los vehiculos
     X_flows_vehiculos = df_flows[['vehiculos']]
     # Definicion del algoritmo

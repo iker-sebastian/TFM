@@ -7,7 +7,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 
@@ -17,7 +16,6 @@ dataset_calidad_aire = list(bdd.coleccion_calidad_aire.find())
 df_calidad_aire = pd.DataFrame(dataset_calidad_aire)
 
 def analisis_calidad_aire():
-    
     # Regresion lineal
     modelo_RL = LinearRegression()
 
