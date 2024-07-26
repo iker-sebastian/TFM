@@ -10,7 +10,7 @@ import analisis_32_incidencias
 # Obtener todos los datos de las colecciones de MongoDB
 dataset_estaciones = list(bdd.coleccion_estaciones.find())
 
-# Crear los df
+# Crear los DF
 df_estaciones = pd.DataFrame(dataset_estaciones)
 
 #array_df = [df_estaciones, analisis_20_calidad_aire.df_calidad_aire, analisis_10_flows.df_flows, df_incidencias, analisis_30_meteo.df_meteo] 

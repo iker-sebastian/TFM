@@ -2,50 +2,57 @@
 import config
 import _11_met_flows
 import bdd
+import asyncio
 
 # Setup de fecha inicial y final
 config.Year_Month_Setting(config.fecha_inicial, config.fecha_hoy)
 
-# Numero de paginas de meter_Id
-config.num_pag_meter = _11_met_flows.API_meterId_pags()
+async def main():
+    # Numero de paginas de meter_Id
+    config.num_pag_meter = await _11_met_flows.API_meterId_pags()
 
-# Bucle para recorrer todos los meter_Id
-while config.contador_pags < config.num_pag_meter:
-    # Llamada a la API meter_Id
-    _11_met_flows.API_meterId()
-    # Aumenta contador paginas
-    config.contador_pags += 1
-# Comprobación valores unicos
-config.array_meterId_unicos =  list(set(config.array_meterId))
-# Reset contador paginas
-config.contador_pags = 1
+    # Bucle para ir realizando las diferentes tareas, la cola de espera incluida
+    tasks = []
+    for i in range(1, config.num_pag_meter + 1):
+        tasks.append(_11_met_flows.API_meterId(i))
+    await asyncio.gather(*tasks)
+    
+    # Comprobación valores únicos
+    config.array_meterId_unicos = list(set(config.array_meterId))
 
-# Recorrer todos los años y meses
-for year_month in config.array_year_month:
-    # Recorrer todos los meter_Id ene sa fecha
-    for meterId in config.array_meterId_unicos:
-        print(meterId)
-        # Paginas de ese meterId en ese año
-        config.num_pag_flows = _11_met_flows.API_flows_pags(meterId, year_month)
-        # Bucle para recorrer todos los meter_Id
-        while config.contador_pags < int(config.num_pag_flows):
-            # Llamada a API FLOWS
-            _11_met_flows.API_flows(meterId, year_month)
-            # Aumenta contador paginas
-            config.contador_pags += 1
-            if config.temporal > 10:
-                break
-        # Reset contador paginas
-        config.contador_pags = 1
-        if config.temporal > 10:
-            break
-    if config.temporal > 10:
-        break
-        
-# Unificar diccionarios por meterId y fecha
-_11_met_flows.unificar_Flows()
+    # Recorrer todos los años y meses
+    for year_month in config.array_year_month:
+        # Recorrer todos los meterId
+        for meterId in config.array_meterId_unicos:
+            print(meterId)
+            # Llamada API y guardar datos en array
+            config.num_pag_flows = await _11_met_flows.API_flows_pags(meterId, year_month)
+            
+            # Verificar si config.num_pag_flows es None
+            if config.num_pag_flows is not None:
+                num_pag_flows = config.num_pag_flows
+            else:
+                num_pag_flows = 0
+            
+            # Para controlar las tareas en paralelo
+            tasks = []
+            for i in range(1, int(num_pag_flows) + 1):
+                tasks.append(_11_met_flows.API_flows(meterId, year_month, i))
+                # Crea una cola de espera
+                if len(tasks) >= 10:
+                    await asyncio.gather(*tasks)
+                    tasks = []
+            
+            await asyncio.gather(*tasks)
 
-# Insercion flows
-for doc in config.array_dic_flows_unificados:
-    # Actualiza el documento si existe '_id', si no inserta datos
-    bdd.coleccion_flows.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
+    # Unificar diccionarios por meterId y fecha
+    _11_met_flows.unificar_Flows()
+
+    # Inserción flows
+    for doc in config.array_dic_flows_unificados:
+        # Actualiza el documento si existe '_id', si no inserta datos
+        bdd.coleccion_flows.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
+
+# Inicializarlo
+if __name__ == '__main__':
+    asyncio.run(main())

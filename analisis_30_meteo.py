@@ -26,6 +26,7 @@ df_precipitaciones = df_meteo[df_meteo['medida'] == 'precipitation']
 df_velocidad_media_viento = df_meteo[df_meteo['medida'] == 'mean_speed']
 df_direccion_viento = df_meteo[df_meteo['medida'] == 'direction_sigma']
 
+# Metodo llamado desde analisis
 def analisis_meteo():
     # Regresion lineal
     modelo_RL = LinearRegression()
@@ -48,9 +49,9 @@ def analisis_meteo():
 
     # DIAGRAMA DE CORRELACION
     # --------------------- #
-    # Listado de los nombres de los dfs divididos
+    # Listado de los nombres de los DFs divididos
     df_divididos = [df_humedad, df_temperatura, df_superficial_wetting, df_visibilidad, df_precipitaciones, df_velocidad_media_viento, df_direccion_viento]
-    # Bucle para recorrer todos los dfs
+    # Bucle para recorrer todos los DFs
     for df in df_divididos:
         # Obtener unicamente los campos numericos
         df_sin_textos = df.select_dtypes(include=['number'])
@@ -66,6 +67,7 @@ def analisis_meteo():
 
     # PREDICCION HUMEDAD #
     # ------------------ #
+    # Division de columnas del DF
     X_humedad = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_humedad = df_meteo['media']
 
@@ -107,6 +109,7 @@ def analisis_meteo():
 
     # PREDICCION TEMPERATURA #
     # ---------------------- #
+    # Division de columnas del DF
     X_temperatura = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_temperatura = df_meteo['media']
 
@@ -148,6 +151,7 @@ def analisis_meteo():
 
     # PREDICCION SW #
     # ---------------------- #
+    # Division de columnas del DF
     X_SW = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_SW = df_meteo['media']
 
@@ -189,6 +193,7 @@ def analisis_meteo():
 
     # PREDICCION VISIBILIDAD #
     # ---------------------- #
+    # Division de columnas del DF
     X_visibilidad = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_visibilidad = df_meteo['media']
 
@@ -230,6 +235,7 @@ def analisis_meteo():
 
     # PREDICCION PRECIPITACIONES #
     # -------------------------- #
+    # Division de columnas del DF
     X_precipitaciones = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_precipitaciones = df_meteo['media']
 
@@ -271,6 +277,7 @@ def analisis_meteo():
 
     # PREDICCION VELOCIDAD MEDIA VIENTO #
     # --------------------------------- #
+    # Division de columnas del DF
     X_vel_media_viento = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_vel_media_viento = df_meteo['media']
 
@@ -312,6 +319,7 @@ def analisis_meteo():
 
     # PREDICCION DIRECCION VIENTO #
     # --------------------------------- #
+    # Division de columnas del DF
     X_direccion_viento = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_direccion_viento = df_meteo['media']
 

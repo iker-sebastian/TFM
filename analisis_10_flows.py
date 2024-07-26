@@ -3,6 +3,7 @@ import bdd
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+
 from sklearn.cluster import KMeans
 
 # Dataset
@@ -10,6 +11,7 @@ dataset_flows = list(bdd.coleccion_flows.find())
 # DF
 df_flows = pd.DataFrame(dataset_flows)
 
+# Metodo llamado desde analisis
 def analisis_flows():
     # Columna a agrupar por clusteres los vehiculos
     X_flows_vehiculos = df_flows[['vehiculos']]

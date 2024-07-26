@@ -1,6 +1,5 @@
 # Imports
 from pymongo import MongoClient
-import pandas as pd
 
 # Conexion con MongoDB
 conn = MongoClient('localhost',27017)

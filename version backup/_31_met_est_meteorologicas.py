@@ -7,16 +7,16 @@ import token_jwt_euskalmet
 def GET_snaphot(cadena):
     # Se establece el separador
     particion = cadena.split('/')
-    # Se establecen los valores a guardar
+    # Se establecen os valores a guardar
     est = particion[2]
     snap = particion[3]
     return est, snap
 
-# Devuelve el sensor del sensorkey
+#Devuelve el sensor del sensorkey
 def GET_sensorkey(cadena):
     # Se establece el separador
     particion = cadena.split('/')
-    # Se establecen los valores a guardar
+    # Se establecen os valores a guardar
     sensor = particion[2]
     return sensor
 
@@ -38,25 +38,23 @@ def API_estaciones():
     else:
         print('Error en la solicitud de la API de estaciones')
 
-# Datos de las estaciones meteorológicas según snapshot
+# Datos de las estaciones meteorlogicas segun snapshot
 def API_estaciones_snapshot(est, snap):
-    # API de valores estación Euskalmet en snapshot
+    # API de valores estacion Euskalmet en snapshot
     url_estaciones_snapshot = f'https://api.euskadi.eus/euskalmet/stations/{est}/{snap}'
-    # Solicitud
+    # Solcitud
     data = requests.get(url_estaciones_snapshot, headers=token_jwt_euskalmet.headers)
     # Respuesta OK
     if data.status_code == 200:
         # Formatear respuesta a json
         data = data.json()
-        # Recoger valores para introducir en el diccionario después
+        # Recoger valores para introducir en el diccionario despues
         sensores = data['sensors']
-        # Limpiar el array antes de comenzar
-        config.array_sensores_por_estacion.clear()
         # Recorrer sensores
         for sensor in sensores:
             valor_sensor = GET_sensorkey(sensor['sensorKey'])
             config.array_sensores_por_estacion.append(valor_sensor)
-        # Crear un diccionario con los datos que interesan
+        # Creo un diccionario con los datos que me interesan
         doc = {
                 '_id': est,
                 'tipo_estacion': data['stationType'],
@@ -66,7 +64,7 @@ def API_estaciones_snapshot(est, snap):
                 'snapshot': snap,
                 'sensores': list(config.array_sensores_por_estacion)
         }
-        # Añadir el diccionario a un array
+        # Añade el diccionario a un array
         config.array_dic_estaciones.append(doc)
     else:
         print('Error en la solicitud de la API de estaciones snapshot')

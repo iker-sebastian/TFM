@@ -15,6 +15,7 @@ dataset_calidad_aire = list(bdd.coleccion_calidad_aire.find())
 # DF
 df_calidad_aire = pd.DataFrame(dataset_calidad_aire)
 
+# Metodo llamado desde analisis
 def analisis_calidad_aire():
     # Regresion lineal
     modelo_RL = LinearRegression()
@@ -36,19 +37,17 @@ def analisis_calidad_aire():
 
     # DF para eliminar los campos que no aportan información
     df_numerico = df_calidad_aire.drop(columns=['_id', 'id_estacion', 'nombre', 'unidad_medicion'])
-
     # Borrar valores atipicos o erroneos
     df_numerico_clean = df_numerico.drop(df_numerico[df_numerico['SO2'] == -1].index)
-
     # DF agrupado
     df_group_by_date = df_numerico_clean.groupby(['fecha', 'provincia']).mean().reset_index()
-
     # Rellenar valores nulos con 0 para prediccion
     df_group_by_date_clean = df_group_by_date.fillna(0)
 
 
     # PREDICCION TOLUENO #
     # ------------------ #
+    # Division de columnas del DF
     X_Tolueno = df_group_by_date_clean[['SO2', 'PM10', 'PM2,5', 'O3 8h', 'NOX']]
     Y_Tolueno = df_group_by_date_clean['Tolueno']
 
@@ -90,6 +89,7 @@ def analisis_calidad_aire():
 
     # PREDICCION SO2 #
     # -------------- #
+    # Division de columnas del DF
     X_SO2 = df_group_by_date_clean[['PM2,5', 'PM10', 'O3 8h', 'Tolueno', 'NOX']]
     Y_SO2 = df_group_by_date_clean['SO2']
 
@@ -131,6 +131,7 @@ def analisis_calidad_aire():
 
     # PREDICCION PM25 #
     # --------------- #
+    # Division de columnas del DF
     X_PM25 = df_group_by_date_clean[['SO2', 'PM10', 'O3 8h', 'Tolueno', 'NOX']]
     Y_PM25 = df_group_by_date_clean['PM2,5']
 
@@ -172,6 +173,7 @@ def analisis_calidad_aire():
 
     # PREDICCION PM10 #
     # --------------- #
+    # Division de columnas del DF
     X_PM10 = df_group_by_date_clean[['SO2', 'PM2,5', 'O3 8h', 'Tolueno', 'NOX']]
     Y_PM10 = df_group_by_date_clean['PM10']
 
@@ -213,6 +215,7 @@ def analisis_calidad_aire():
 
     # PREDICCION 03 8h #
     # ---------------- #
+    # Division de columnas del DF
     X_03_8h = df_group_by_date_clean[['SO2', 'PM2,5', 'PM10', 'Tolueno', 'NOX']]
     Y_03_8h = df_group_by_date_clean['O3 8h']
 
@@ -254,6 +257,7 @@ def analisis_calidad_aire():
 
     # PREDICCION NOX #
     # -------------- #
+    # Division de columnas del DF
     X_NOX = df_group_by_date_clean[['SO2', 'PM2,5', 'PM10', 'O3 8h', 'Tolueno']]
     Y_NOX = df_group_by_date_clean['NOX']
 

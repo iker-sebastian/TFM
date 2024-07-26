@@ -3,11 +3,13 @@ import bdd
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+
 from sklearn.cluster import KMeans
 
+# Metodo para verificar correcto formato de la fecha
 def fechas_incompletas(fecha):
-    # Verificar si los segundos están presentes
-    if len(fecha) == 16:  # Formato sin segundos: YYYY-MM-DDTHH:MM
+    # Verificar si los segundos estan presentes
+    if len(fecha) == 16:
         return fecha + ':00'
     return fecha
 
@@ -16,6 +18,7 @@ dataset_incidencias = list(bdd.coleccion_incidencias.find())
 # DF
 df_incidencias = pd.DataFrame(dataset_incidencias)
 
+# Metodo llamado desde analisis
 def analisis_incidencias():
     # Unificar nomenclatura provincias
     df_incidencias['province'] = df_incidencias['province'].replace('Alava-Araba', 'ARABA')
