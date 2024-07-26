@@ -2,11 +2,11 @@
 import requests
 import config
 
-# Metodo que llama a la API que devuelve todas las incidencias
+# Método que llama a la API que devuelve todas las incidencias
 def API_incidencias(year, month, day):
     # API de incidencias
     url_incidencias = f'https://api.euskadi.eus/traffic//v1.0/incidences/byDate/{year}/{month}/{day}'
-    # Solcitud
+    # Solicitud
     data = requests.get(url_incidencias)
     # Respuesta OK
     if data.status_code == 200:
@@ -17,7 +17,8 @@ def API_incidencias(year, month, day):
         for documento in data_incidencias:
             cityTown = documento.get('cityTown', 'road')
             causa = documento.get('cause', 'Unknown cause')
-            # Creo un diccionario con los datos que me interesan
+            carretera = documento.get('road', 'Unknown road')
+            # Crear un diccionario con los datos que interesan
             doc = {
                 '_id': documento['incidenceId'],
                 'sourceId': documento['sourceId'],
@@ -26,9 +27,9 @@ def API_incidencias(year, month, day):
                 'cause': causa,
                 'cityTown': cityTown,
                 'startDate': documento['startDate'],
-                'road': documento['road']
+                'road': carretera
             }
-            # Añade el diccionario a un array
+            # Añadir el diccionario a un array
             config.array_dic_incidencias.append(doc)
             print(f"inc_{config.id_inc}")
             config.id_inc += 1

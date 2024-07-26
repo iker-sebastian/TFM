@@ -63,9 +63,9 @@ def API_meterId():
                 break
 
 # Datos de flows de un mes con un meterId
-def API_flows_pags(meterId, year_month):
+def API_flows_pags(meter, year_month):
     # API de flows
-    url_flows_pags = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meterId}'
+    url_flows_pags = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meter}'
     # Solcitud
     data = requests.get(url_flows_pags)
     # Obtener paginas por meterId
@@ -77,9 +77,9 @@ def API_flows_pags(meterId, year_month):
         return data_totalPages
 
 # Datos de flows de un mes con un meterId
-def API_flows(meterId, year_month):
+def API_flows(meter, year_month):
     # API de flows
-    url_flows = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meterId}1?_page={config.contador_pags}'
+    url_flows = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meter}1?_page={config.contador_pags}'
     # En caso de fallo un par de intentos adicionales
     for intento in range(config.intentos):
         # Excepción en caso de perdida de conexión
@@ -97,7 +97,7 @@ def API_flows(meterId, year_month):
                     # Creo un diccionario con los datos que me interesan
                     doc = {
                             '_id': documento['meterId'] + '_' + documento['meterDate'] + '_' + documento['timeRank'],
-                            'meterId': meterId,
+                            'meterId': meter,
                             'source': documento['sourceId'],
                             'fecha': documento['meterDate'],
                             'año': year_month[0],

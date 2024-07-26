@@ -3,7 +3,7 @@ import datetime
 import bdd
 
 # Setting de fechas
-fecha_hoy =  datetime.date(2024, 6, 1) #datetime.date.today()
+fecha_hoy =  datetime.date(2024, 7, 1) #datetime.date.today()
 fecha_inicial = datetime.date(2024, 1, 1)
 fecha_recorrida = fecha_inicial
 fecha_completa = ''
