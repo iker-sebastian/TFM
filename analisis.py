@@ -4,17 +4,11 @@ import pandas as pd
 
 import analisis_10_flows
 import analisis_20_calidad_aire
-import analisis_30_meteo
+import analisis_30_estaciones
 import analisis_32_incidencias
+import analisis_33_meteo
 
-# Obtener todos los datos de las colecciones de MongoDB
-dataset_estaciones = list(bdd.coleccion_estaciones.find())
-
-# Crear los DF
-df_estaciones = pd.DataFrame(dataset_estaciones)
-
-#array_df = [df_estaciones, analisis_20_calidad_aire.df_calidad_aire, analisis_10_flows.df_flows, df_incidencias, analisis_30_meteo.df_meteo] 
-array_df = [analisis_32_incidencias.df_incidencias]
+array_df = [analisis_10_flows.df_flows, analisis_20_calidad_aire.df_calidad_aire, analisis_30_estaciones.df_estaciones, analisis_32_incidencias.df_incidencias, analisis_33_meteo.df_meteo] 
 
 # ------------------------------- ANALISIS EXPLORATORIO COMUN ------------------------------------------ #
 
@@ -42,14 +36,14 @@ for array in array_df:
     for columna in columnas:
         print(array[columna].value_counts())
 
-# ---------------------------------- CALIDAD AIRE -------------------------------------- #
-#analisis_20_calidad_aire.analisis_calidad_aire()
-
 # ------------------------------------- FLOWS ------------------------------------------ #
-#analisis_10_flows.analisis_flows()
+analisis_10_flows.analisis_flows()
 
-# ------------------------------------- METEO ------------------------------------------ #
-#analisis_30_meteo.analisis_meteo()
+# ---------------------------------- CALIDAD AIRE -------------------------------------- #
+analisis_20_calidad_aire.analisis_calidad_aire()
 
 # ---------------------------------- INCIDENCIAS --------------------------------------- #
 analisis_32_incidencias.analisis_incidencias()
+
+# ------------------------------------- METEO ------------------------------------------ #
+analisis_33_meteo.analisis_meteo()

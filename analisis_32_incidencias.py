@@ -37,10 +37,18 @@ def analisis_incidencias():
     clustering_incidencias = KMeans(n_clusters=3)
     df_group_by_date['nivel_incidencias'] = clustering_incidencias.fit_predict(X_incidencias)
 
-    print(df_group_by_date.head())
-
+    # Graficar clustering
     plt.scatter(df_group_by_date['num_incidentes'], np.zeros_like(df_group_by_date['num_incidentes']), c=df_group_by_date['nivel_incidencias'], cmap='viridis')
     plt.xlabel('Numero de incidencias')
     plt.title('Clusters')
     plt.yticks([])
     plt.show()
+
+    # Creacion clave para merge en df_group_by_date
+    df_group_by_date['clave_union'] = df_group_by_date['startDate'].astype(str) + '_' + df_group_by_date['province'] + '_' + df_group_by_date['incidenceType']
+    # Creacion clave para merge en df_incidencias
+    df_incidencias['clave_union'] = df_incidencias['startDate'].dt.date.astype(str) + '_' + df_incidencias['province'] + '_' + df_incidencias['incidenceType']
+    # Merge de df_incidencias con df_group_by_date
+    df_incidencias = df_incidencias.merge(df_group_by_date[['clave_union', 'nivel_incidencias']], on='clave_union', how='left')
+
+    print(df_incidencias.head())
