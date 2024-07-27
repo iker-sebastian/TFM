@@ -1,109 +1,101 @@
 # Imports
 import config
-import asyncio
-import aiohttp
+import requests
 from collections import defaultdict
+import time
 
 # Paginas meter_Id
-async def API_meterId_pags():
+def API_meterId_pags():
     # API de las paginas de meterId
     url_meterId_pags = 'https://api.euskadi.eus/traffic/v1.0/meters'
-    # Sesion aiohttp
-    async with aiohttp.ClientSession() as session:
-        # Respuestas asincronas
-        async with session.get(url_meterId_pags) as response:
-            # Respuesta OK
-            if response.status == 200:
-                # Formatear respuesta a json
-                data = await response.json()
-                data_totalPages = data['totalPages']
-                return data_totalPages
+    # Solcitud
+    response = requests.get(url_meterId_pags)
+    # Respuesta OK
+    if response.status == 200:
+        # Formatear respuesta a json
+        data = response.json()
+        data_totalPages = data['totalPages']
+        return data_totalPages
 
 # Valores meter_Id    
-async def API_meterId(page):
+def API_meterId(page):
     # API de los datos de meterId
     url_meterId = f'https://api.euskadi.eus/traffic/v1.0/meters?_page={page}'
-    # Sesion aiohttp
-    async with aiohttp.ClientSession() as session:
-        # Intentos para redundancia
-        for intento in range(config.intentos):
-            # Excepcion
-            try:
-                # Respuestas asincronas
-                async with session.get(url_meterId) as response:
-                    # Respuesta OK
-                    if response.status == 200:
-                        # Formatear respuesta a json
-                        data = await response.json()
-                        data_features = data['features']
-                        for feature in data_features:
-                            meterId = feature['properties']['meterId']
-                            # Añadir meterId a array
-                            config.array_meterId.append(int(meterId))
-                        break
-            # Segunda parte excepcion (ClientConnectionError, ClientResponeError)
-            except (aiohttp.ClientConnectionError, aiohttp.ClientResponseError):
-                if intento < config.intentos - 1:
-                    await asyncio.sleep(5)
-                else:
-                    print('El número máximo de intentos ha sido alcanzado')
-
-# Datos de flows de un mes con un meterId
-async def API_flows_pags(meterId, year_month):
-    # API de las paginas de flows
-    url_flows_pags = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meterId}'
-    # Sesion aiohttp
-    async with aiohttp.ClientSession() as session:
-        # Respuestas asincronas
-        async with session.get(url_flows_pags) as response:
+    # Intentos para redundancia
+    for intento in range(config.intentos):
+        # Excepcion
+        try:
+            # Solcitud
+            response = requests.get(url_meterId)
             # Respuesta OK
             if response.status == 200:
                 # Formatear respuesta a json
-                data = await response.json()
-                data_totalPages = data['totalPages']
-                return data_totalPages
+                data = response.json()
+                data_features = data['features']
+                for feature in data_features:
+                    meterId = feature['properties']['meterId']
+                    # Añadir meterId a array
+                    config.array_meterId.append(int(meterId))
+                break
+        # Segunda parte excepcion (ConnectionError, HTTPError)
+        except (requests.ConnectionError, requests.Timeout, requests.HTTPError):
+            if intento < config.intentos - 1:
+                time.sleep(5)
+            else:
+                print('El número máximo de intentos ha sido alcanzado')
 
 # Datos de flows de un mes con un meterId
-async def API_flows(meterId, year_month, page):
+def API_flows_pags(meterId, year_month):
+    # API de las paginas de flows
+    url_flows_pags = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meterId}'
+    # Solcitud
+    response = requests.get(url_flows_pags)
+    # Respuesta OK
+    if response.status == 200:
+        # Formatear respuesta a json
+        data = response.json()
+        data_totalPages = data['totalPages']
+        return data_totalPages
+
+# Datos de flows de un mes con un meterId
+def API_flows(meterId, year_month, page):
     # API de los datos de flows
     url_flows = f'https://api.euskadi.eus/traffic/v1.0/flows/byYear/{year_month[0]}/byMeter/{meterId}1?_page={page}'
-    # Sesion aiohttp
-    async with aiohttp.ClientSession() as session:
-        # Intentos para redundancia
-        for intento in range(config.intentos):
-            # Excepcion
-            try:
-                # Respuestas asincronas
-                async with session.get(url_flows, timeout=30) as response:
-                    # Respuesta OK
-                    if response.status == 200:
-                        # Formatear respuesta a json
-                        data = await response.json()
-                        data_flows = data['flows']
-                        # Recorrer flows
-                        for documento in data_flows:
-                            # Si no encuentra velocidad media, es 0
-                            velocidad_media = documento.get('speedAvg', 0)
-                            # Crear un diccionario con los datos que interesan
-                            doc = {
-                                '_id': documento['meterId'] + '_' + documento['meterDate'] + '_' + documento['timeRank'],
-                                'meterId': meterId,
-                                'source': documento['sourceId'],
-                                'fecha': documento['meterDate'],
-                                'año': year_month[0],
-                                'mes': year_month[1],
-                                'vel_media': velocidad_media,
-                                'vehiculos': documento['totalVehicles']
-                            }
-                            # Añadir el diccionario a un array
-                            config.array_dic_flows.append(doc)
-                        break
-            # Segunda parte excepcion (ClientConnectionError, ClientResponeError, TimeoutError)
-            except (aiohttp.ClientConnectionError, aiohttp.ClientResponseError, asyncio.TimeoutError):
-                if intento < config.intentos - 1:
-                    await asyncio.sleep(5)
-                else:
-                    print('El número máximo de intentos ha sido alcanzado')
+    # Intentos para redundancia
+    for intento in range(config.intentos):
+        # Excepcion
+        try:
+            # Solcitud
+            response = requests.get(url_flows)
+            # Respuesta OK
+            if response.status == 200:
+                # Formatear respuesta a json
+                data = response.json()
+                data_flows = data['flows']
+                # Recorrer flows
+                for documento in data_flows:
+                    # Si no encuentra velocidad media, es 0
+                    velocidad_media = documento.get('speedAvg', 0)
+                    # Crear un diccionario con los datos que interesan
+                    doc = {
+                        '_id': documento['meterId'] + '_' + documento['meterDate'] + '_' + documento['timeRank'],
+                        'meterId': meterId,
+                        'source': documento['sourceId'],
+                        'fecha': documento['meterDate'],
+                        'año': year_month[0],
+                        'mes': year_month[1],
+                        'vel_media': velocidad_media,
+                        'vehiculos': documento['totalVehicles']
+                    }
+                    # Añadir el diccionario a un array
+                    config.array_dic_flows.append(doc)
+                break
+        # Segunda parte excepcion (ClientConnectionError, ClientResponeError, TimeoutError)
+        except (requests.ConnectionError, requests.Timeout, requests.HTTPError):
+            if intento < config.intentos - 1:
+                time.sleep(5)
+            else:
+                print('El número máximo de intentos ha sido alcanzado')
 
 # Obtener un único registro por día
 def unificar_Flows():

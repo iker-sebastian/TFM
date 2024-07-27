@@ -1,5 +1,5 @@
 # Imports
-import datetime
+import datetime 
 
 # Setting de fechas
 fecha_hoy =  datetime.date(2024, 7, 1) #datetime.date.today()
