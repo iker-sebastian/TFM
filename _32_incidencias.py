@@ -2,16 +2,16 @@
 import requests
 import config
 
-# Método que llama a la API que devuelve todas las incidencias
+# Metodo que llama a la API que devuelve todas las incidencias
 def API_incidencias(year, month, day):
     # API de incidencias
     url_incidencias = f'https://api.euskadi.eus/traffic//v1.0/incidences/byDate/{year}/{month}/{day}'
     # Solicitud
-    data = requests.get(url_incidencias)
+    response = requests.get(url_incidencias)
     # Respuesta OK
-    if data.status_code == 200:
+    if response.status_code == 200:
         # Formatear respuesta a json
-        data = data.json()
+        data = response.json()
         # Recoger el campo 'incidences'
         data_incidencias = data['incidences']
         for documento in data_incidencias:

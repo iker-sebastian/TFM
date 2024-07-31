@@ -1,18 +1,20 @@
 # Imports
 import bdd
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 import analisis_10_flows
 import analisis_20_calidad_aire
 import analisis_30_estaciones
 import analisis_32_incidencias
-import analisis_33_meteo
+#import analisis_33_meteo
 
-array_df = [analisis_10_flows.df_flows, analisis_20_calidad_aire.df_calidad_aire, analisis_30_estaciones.df_estaciones, analisis_32_incidencias.df_incidencias, analisis_33_meteo.df_meteo] 
-
+#array_df = [analisis_10_flows.df_flows, analisis_20_calidad_aire.df_calidad_aire, analisis_30_estaciones.df_estaciones, analisis_32_incidencias.df_incidencias, analisis_33_meteo.df_meteo] 
+array_df = [analisis_10_flows.df_flows]
 # ------------------------------- ANALISIS EXPLORATORIO COMUN ------------------------------------------ #
 
-# Obtención de información general de cada colección
+# Obtencion de informacion general de cada coleccion
 for array in array_df:
     # Visualizar las primeras lineas del df
     print(array.head())
@@ -22,11 +24,11 @@ for array in array_df:
     print(array.shape)
     print('------------------------------------------------------------------------')
 
-    # Información detallada del conjunto de datos
+    # Informacion detallada del conjunto de datos
     print(array.info())
     print('------------------------------------------------------------------------')
 
-    # Descripción del conjunto de datos
+    # Descripcion del conjunto de datos
     print(array.describe())
     print('------------------------------------------------------------------------')
 
@@ -36,14 +38,27 @@ for array in array_df:
     for columna in columnas:
         print(array[columna].value_counts())
 
+    # DF con unicamente variables numericas
+    array_num = array.select_dtypes(include=['int', 'float'])
+    # Definir matriz de correlacion
+    matriz_corr = array_num.corr()
+    # Definir tamaño de la figura
+    plt.figure(figsize=(10, 8))
+    # Estilo
+    sns.heatmap(matriz_corr, annot=True, cmap='coolwarm')
+    # Añadir titulo
+    plt.title('Matriz de Correlacion')
+    # Dibujar
+    plt.show()
+
 # ------------------------------------- FLOWS ------------------------------------------ #
 analisis_10_flows.analisis_flows()
 
 # ---------------------------------- CALIDAD AIRE -------------------------------------- #
-analisis_20_calidad_aire.analisis_calidad_aire()
+#analisis_20_calidad_aire.analisis_calidad_aire()
 
 # ---------------------------------- INCIDENCIAS --------------------------------------- #
-analisis_32_incidencias.analisis_incidencias()
+#analisis_32_incidencias.analisis_incidencias()
 
 # ------------------------------------- METEO ------------------------------------------ #
-analisis_33_meteo.analisis_meteo()
+#analisis_33_meteo.analisis_meteo()

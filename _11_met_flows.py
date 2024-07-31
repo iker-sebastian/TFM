@@ -11,7 +11,7 @@ def API_meterId_pags():
     # Solcitud
     response = requests.get(url_meterId_pags)
     # Respuesta OK
-    if response.status == 200:
+    if response.status_code == 200:
         # Formatear respuesta a json
         data = response.json()
         data_totalPages = data['totalPages']
@@ -28,7 +28,7 @@ def API_meterId(page):
             # Solcitud
             response = requests.get(url_meterId)
             # Respuesta OK
-            if response.status == 200:
+            if response.status_code == 200:
                 # Formatear respuesta a json
                 data = response.json()
                 data_features = data['features']
@@ -42,7 +42,7 @@ def API_meterId(page):
             if intento < config.intentos - 1:
                 time.sleep(5)
             else:
-                print('El número máximo de intentos ha sido alcanzado')
+                print('El numero maximo de intentos ha sido alcanzado')
 
 # Datos de flows de un mes con un meterId
 def API_flows_pags(meterId, year_month):
@@ -51,7 +51,7 @@ def API_flows_pags(meterId, year_month):
     # Solcitud
     response = requests.get(url_flows_pags)
     # Respuesta OK
-    if response.status == 200:
+    if response.status_code == 200:
         # Formatear respuesta a json
         data = response.json()
         data_totalPages = data['totalPages']
@@ -68,7 +68,7 @@ def API_flows(meterId, year_month, page):
             # Solcitud
             response = requests.get(url_flows)
             # Respuesta OK
-            if response.status == 200:
+            if response.status_code == 200:
                 # Formatear respuesta a json
                 data = response.json()
                 data_flows = data['flows']
@@ -95,9 +95,9 @@ def API_flows(meterId, year_month, page):
             if intento < config.intentos - 1:
                 time.sleep(5)
             else:
-                print('El número máximo de intentos ha sido alcanzado')
+                print('El numero maximo de intentos ha sido alcanzado')
 
-# Obtener un único registro por día
+# Obtener un unico registro por dia
 def unificar_Flows():
     # Se crea un nuevo elemento con formato diccionario
     diccionarios_agrupados = defaultdict(list)

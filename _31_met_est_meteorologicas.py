@@ -25,11 +25,11 @@ def API_estaciones():
     # API de estaciones Euskalmet
     url_estaciones = 'https://api.euskadi.eus/euskalmet/stations'
     # Solicitud
-    data = requests.get(url_estaciones, headers=token_jwt_euskalmet.headers)
+    response = requests.get(url_estaciones, headers=token_jwt_euskalmet.headers)
     # Respuesta OK
-    if data.status_code == 200:
+    if response.status_code == 200:
         # Formatear respuesta a json
-        data = data.json()
+        data = response.json()
         for estacion in data:
             clave = estacion['key']
             est_id, snapshot = GET_snaphot(clave)
@@ -38,17 +38,17 @@ def API_estaciones():
     else:
         print('Error en la solicitud de la API de estaciones')
 
-# Datos de las estaciones meteorológicas según snapshot
+# Datos de las estaciones meteorologicas segun snapshot
 def API_estaciones_snapshot(est, snap):
-    # API de valores estación Euskalmet en snapshot
+    # API de valores estacion Euskalmet en snapshot
     url_estaciones_snapshot = f'https://api.euskadi.eus/euskalmet/stations/{est}/{snap}'
     # Solicitud
-    data = requests.get(url_estaciones_snapshot, headers=token_jwt_euskalmet.headers)
+    response = requests.get(url_estaciones_snapshot, headers=token_jwt_euskalmet.headers)
     # Respuesta OK
-    if data.status_code == 200:
+    if response.status_code == 200:
         # Formatear respuesta a json
-        data = data.json()
-        # Recoger valores para introducir en el diccionario después
+        data = response.json()
+        # Recoger valores para introducir en el diccionario despues
         sensores = data['sensors']
         # Limpiar el array antes de comenzar
         config.array_sensores_por_estacion.clear()

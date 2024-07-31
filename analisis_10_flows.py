@@ -25,8 +25,8 @@ def analisis_flows():
     clustering_flows_vel_circulacion = KMeans(n_clusters=5)
     df_flows['vel_circulacion'] = clustering_flows_vel_circulacion.fit_predict(X_flows_vel_circulacion)
 
-    '''plt.scatter(df_flows['vehiculos'], np.zeros_like(df_flows['vehiculos']), c=df_flows['afluencia'], cmap='viridis')
-    plt.xlabel('Afluencia de vehículos')
+    plt.scatter(df_flows['vehiculos'], np.zeros_like(df_flows['vehiculos']), c=df_flows['afluencia'], cmap='viridis')
+    plt.xlabel('Afluencia de vehiculos')
     plt.title('Clusters')
     plt.yticks([])
     plt.show()
@@ -35,4 +35,4 @@ def analisis_flows():
     plt.xlabel('Velocidad media de ciruculacion')
     plt.title('Clusters')
     plt.yticks([])
-    plt.show()'''
+    plt.show()

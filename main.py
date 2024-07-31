@@ -3,6 +3,7 @@ import concurrent.futures
 import _10_flows
 import _20_calidad_aire
 import _30_est_meteorologicas
+import os
 
 def run_10_flows():
     _10_flows.main()
@@ -14,7 +15,9 @@ def run_30_meteorologia():
     _30_est_meteorologicas.main()
 
 def main():
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    num_workers = os.cpu_count()
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
         futures = [
             executor.submit(run_10_flows),
             executor.submit(run_20_calidad_aire),
@@ -26,7 +29,7 @@ def main():
             try:
                 tarea.result()
             except Exception as e:
-                print(f"Ocurrió un error: {e}")
+                print(f'Ocurrio un error: {e}')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

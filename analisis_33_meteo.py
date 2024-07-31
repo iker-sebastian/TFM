@@ -61,14 +61,14 @@ def analisis_meteo():
         correlation_matrix = df_sin_textos.corr()
         # Estetica
         sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
-        plt.title(f'Matriz de Correlación {df}')
+        plt.title(f'Matriz de Correlacion {df}')
         plt.show()
 
 
     # PREDICCION HUMEDAD #
     # ------------------ #
     # Division de columnas del DF
-    X_humedad = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_humedad = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_humedad = df_meteo['media']
 
     # Division de datos
@@ -88,7 +88,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_humedad = modelo_RF.predict(X_humedad_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_humedad, mae_RN_humedad = modelo_RN.evaluate(X_humedad_test, Y_humedad_test)
 
     # Metricas
@@ -110,7 +110,7 @@ def analisis_meteo():
     # PREDICCION TEMPERATURA #
     # ---------------------- #
     # Division de columnas del DF
-    X_temperatura = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_temperatura = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_temperatura = df_meteo['media']
 
     # Division de datos
@@ -130,7 +130,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_temperatura = modelo_RF.predict(X_temperatura_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_temperatura, mae_RN_temperatura = modelo_RN.evaluate(X_temperatura_test, Y_temperatura_test)
 
     # Metricas
@@ -152,7 +152,7 @@ def analisis_meteo():
     # PREDICCION SW #
     # ---------------------- #
     # Division de columnas del DF
-    X_SW = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_SW = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_SW = df_meteo['media']
 
     # Division de datos
@@ -172,7 +172,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_SW = modelo_RF.predict(X_SW_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_SW, mae_RN_SW = modelo_RN.evaluate(X_SW_test, Y_SW_test)
 
     # Metricas
@@ -194,7 +194,7 @@ def analisis_meteo():
     # PREDICCION VISIBILIDAD #
     # ---------------------- #
     # Division de columnas del DF
-    X_visibilidad = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_visibilidad = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_visibilidad = df_meteo['media']
 
     # Division de datos
@@ -214,7 +214,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_visibilidad = modelo_RF.predict(X_visibilidad_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_visibilidad, mae_RN_visibilidad = modelo_RN.evaluate(X_visibilidad_test, Y_visibilidad_test)
 
     # Metricas
@@ -236,7 +236,7 @@ def analisis_meteo():
     # PREDICCION PRECIPITACIONES #
     # -------------------------- #
     # Division de columnas del DF
-    X_precipitaciones = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_precipitaciones = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_precipitaciones = df_meteo['media']
 
     # Division de datos
@@ -256,7 +256,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_precipitaciones = modelo_RF.predict(X_precipitaciones_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_precipitaciones, mae_RN_precipitaciones = modelo_RN.evaluate(X_precipitaciones_test, Y_precipitaciones_test)
 
     # Metricas
@@ -278,7 +278,7 @@ def analisis_meteo():
     # PREDICCION VELOCIDAD MEDIA VIENTO #
     # --------------------------------- #
     # Division de columnas del DF
-    X_vel_media_viento = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_vel_media_viento = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_vel_media_viento = df_meteo['media']
 
     # Division de datos
@@ -298,7 +298,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_vel_media_viento = modelo_RF.predict(X_vel_media_viento_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_vel_media_viento, mae_RN_vel_media_viento = modelo_RN.evaluate(X_vel_media_viento_test, Y_vel_media_viento_test)
 
     # Metricas
@@ -320,7 +320,7 @@ def analisis_meteo():
     # PREDICCION DIRECCION VIENTO #
     # --------------------------------- #
     # Division de columnas del DF
-    X_direccion_viento = df_meteo[['año', 'día', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    X_direccion_viento = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_direccion_viento = df_meteo['media']
 
     # Division de datos
@@ -340,7 +340,7 @@ def analisis_meteo():
     # Prediccion RF
     prediccion_RF_direccion_viento = modelo_RF.predict(X_direccion_viento_test)
 
-    # Evaluación RN
+    # Evaluacion RN
     mse_RN_direccion_viento, mae_RN_direccion_viento = modelo_RN.evaluate(X_direccion_viento_test, Y_direccion_viento_test)
 
     # Metricas

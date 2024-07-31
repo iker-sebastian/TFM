@@ -6,15 +6,15 @@ import token_jwt_euskalmet
 def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
     # API de Euskalmet para obtener datos
     url_datos = f'https://api.euskadi.eus/euskalmet/readings/summarized/byDay/forStation/{estacion}/{sensor}/measures/{tipo_medida}/{medida}/at/{year}/{month}/{day}'
-    # Excepción en caso de pérdida de conexión
+    # Excepcion en caso de perdida de conexion
     try:
         # Solicitud
-        data = requests.get(url_datos, headers=token_jwt_euskalmet.headers)
+        response = requests.get(url_datos, headers=token_jwt_euskalmet.headers)
         # Respuesta OK
-        if data.status_code == 200:
+        if response.status_code == 200:
             # Formatear respuesta a json
-            data = data.json()
-            # Excepción por si no existe maxAccumulated
+            data = response.json()
+            # Excepcion por si no existe maxAccumulated
             try:
                 maximo_acumulado = data['maxAccumulated']['accumulated']
             except KeyError:
@@ -40,8 +40,8 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             print(f'met_{config.id_met}')
             config.id_met += 1
         #else:
-            # Se comenta el print por tema de tiempos de ejecución
-            #print('Error en la solicitud de la API de meteorología')
-    # Segunda parte de la excepción
+            # Se comenta el print por tema de tiempos de ejecucion
+            #print('Error en la solicitud de la API de meteorologia')
+    # Segunda parte de la excepcion
     except requests.exceptions.ConnectionError:
-        print(f'Error de comunicación! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]')
+        print(f'Error de comunicacion! Estos son los datos: [estacion: {estacion}, sensor: {sensor}, tipo de medida: {tipo_medida}, medida: {medida}, year: {year}, month: {month} y day: {day}]')

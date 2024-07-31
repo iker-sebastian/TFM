@@ -28,7 +28,7 @@ def analisis_incidencias():
     df_incidencias['startDate'] = df_incidencias['startDate'].apply(fechas_incompletas)
     # Convertir la columna startDate al formato de fecha
     df_incidencias['startDate'] = pd.to_datetime(df_incidencias['startDate'], errors='coerce', format='%Y-%m-%dT%H:%M:%S')
-    # Agrupar por fecha completa y provincia y contar el número de incidencias
+    # Agrupar por fecha completa y provincia y contar el numero de incidencias
     df_group_by_date = df_incidencias.groupby([df_incidencias['startDate'].dt.date, 'province', 'incidenceType']).size().reset_index(name='num_incidentes')
 
     # Columna a agrupar por clusteres los incidencias
@@ -50,5 +50,3 @@ def analisis_incidencias():
     df_incidencias['clave_union'] = df_incidencias['startDate'].dt.date.astype(str) + '_' + df_incidencias['province'] + '_' + df_incidencias['incidenceType']
     # Merge de df_incidencias con df_group_by_date
     df_incidencias = df_incidencias.merge(df_group_by_date[['clave_union', 'nivel_incidencias']], on='clave_union', how='left')
-
-    print(df_incidencias.head())

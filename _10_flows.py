@@ -14,7 +14,7 @@ def main():
     for pagina in range(int(config.num_pag_meter)):
         _11_met_flows.API_meterId(pagina)
 
-    # Comprobación valores únicos
+    # Comprobacion valores unicos
     config.array_meterId_unicos = list(set(config.array_meterId))
 
     # Recorrer todos los años y meses
@@ -38,7 +38,7 @@ def main():
         # Unificar diccionarios por meterId y fecha
         _11_met_flows.unificar_Flows()
 
-        # Inserción flows
+        # Insercion flows
         for doc in config.array_dic_flows_unificados:
             # Actualiza el documento si existe '_id', si no inserta datos
             bdd.coleccion_flows.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
