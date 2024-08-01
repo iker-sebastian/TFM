@@ -6,6 +6,11 @@ import numpy as np
 
 from sklearn.cluster import KMeans
 
+# Dataset
+dataset_incidencias = list(bdd.coleccion_incidencias.find())
+# DF
+df_incidencias = pd.DataFrame(dataset_incidencias)
+
 # Metodo para verificar correcto formato de la fecha
 def fechas_incompletas(fecha):
     # Verificar si los segundos estan presentes
@@ -13,13 +18,10 @@ def fechas_incompletas(fecha):
         return fecha + ':00'
     return fecha
 
-# Dataset
-dataset_incidencias = list(bdd.coleccion_incidencias.find())
-# DF
-df_incidencias = pd.DataFrame(dataset_incidencias)
-
 # Metodo llamado desde analisis
 def analisis_incidencias():
+    global df_incidencias
+    print(df_incidencias.head())
     # Unificar nomenclatura provincias
     df_incidencias['province'] = df_incidencias['province'].replace('Alava-Araba', 'ARABA')
     df_incidencias['province'] = df_incidencias['province'].replace('Bizkaia', 'BIZKAIA')

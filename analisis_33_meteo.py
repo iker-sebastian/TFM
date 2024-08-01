@@ -13,7 +13,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from scikeras.wrappers import KerasRegressor
 
-
 # Dataset
 dataset_meteo = list(bdd.coleccion_meteo.find())
 # DF
@@ -27,6 +26,9 @@ df_precipitaciones = df_meteo[df_meteo['medida'] == 'precipitation']
 df_velocidad_media_viento = df_meteo[df_meteo['medida'] == 'mean_speed']
 df_direccion_viento = df_meteo[df_meteo['medida'] == 'direction_sigma']
 
+# Inicializar modelo red neuronal
+modelo_red_neuronal = None
+
 # Metodo llamado para invocar red neuronal
 def red_neuronal():
     # Acceder a modelo_red_neuronal
@@ -35,7 +37,7 @@ def red_neuronal():
     if modelo_red_neuronal is None:
         # Red neuronal
         modelo_red_neuronal = Sequential()
-        modelo_red_neuronal.add(Dense(512, activation='relu', input_dim=5))
+        modelo_red_neuronal.add(Dense(512, activation='relu', input_dim=7))
         modelo_red_neuronal.add(Dropout(0.1))
         modelo_red_neuronal.add(Dense(512, activation='relu'))
         modelo_red_neuronal.add(Dropout(0.1))
@@ -176,7 +178,7 @@ def analisis_meteo():
     r2_RN_SW = r2_score(Y_SW, predicciones_RN_SW)
     
     # Impresion
-    print(f'Superficial wetting')
+    print(f'Humectacion superficial')
     print(f'MSE: RL-> {mse_RL_SW} | RF-> {mse_RF_SW}  | RN-> {mse_RN_SW}')
     print(f'MAE: RL-> {mae_RL_SW} | RF-> {mae_RF_SW} | RN-> {mae_RN_SW}')
     print(f'R2: RL-> {r2_RL_SW} | RF-> {r2_RF_SW} | RN-> {r2_RN_SW}')

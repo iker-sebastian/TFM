@@ -1,0 +1,145 @@
+_id,municipio,nombre,provincia,sensores[0],sensores[1],sensores[2],sensores[3],sensores[4],sensores[5],sensores[6],sensores[7],sensores[8],sensores[9],sensores[10],sensores[11],sensores[12],sensores[13],sensores[14],sensores[15],sensores[16],sensores[17],sensores[18],sensores[19],snapshot,tipo_estacion
+B092,Bermeo,Puerto de Bermeo,Bizkaia,CB00,MO00,VV00,CT04,TA00,CT03,CT02,CT01,CT00,DV00,RA02,HA00,MI00,RN00,CB05,SP00,CB04,CB03,CB02,CB01,20210524,BUOY
+B096,Pasaia,Puerto de Pasaia,Gipuzkoa,PA05,TA06,SP06,AWA1,DV06,MO06,CB36,HA06,VV06,,,,,,,,,,,,20221003,BUOY
+B090,Santurtzi,Puerto de Bilbao,Bizkaia,MO05,PA05,SP05,TA05,DV05,VV05,HA05,,,,,,,,,,,,,,20221003,BUOY
+B097,Hondarribia,Puerto de Hondarribia,Gipuzkoa,CB11,CB10,CT09,CT08,MO01,CT07,CT06,CT05,TA01,VV01,RA07,DV01,CB09,CB08,SP01,CB07,MI01,CB06,HA01,RN01,20210524,BUOY
+C007,Donostia / San Sebastián,Santa Clara,Gipuzkoa,R0FY,K0AA,Y094,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C004,Bakio,Bakio,Bizkaia,IS98,,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C008,Zeanuri,Zeanuri,Bizkaia,UL08,UI08,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C005,Gatika,Gatika,Bizkaia,RA05,UI05,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C001,Vitoria-Gasteiz,Arkaute I,Álava,G4RG,S005,Y0RH,G444,K614,G465,G4AC,Y0BQ,K0AM,Y0AH,S001,S0AC,G4AP,R052,,,,,,,20210525,METEOROLOGICAL
+C003,Derio,Derio,Bizkaia,R008,Y0AS,G458,,,,,,,,,,,,,,,,,,20231219,METEOROLOGICAL
+C002,Gautegiz Arteaga,Arteaga,Bizkaia,G4RE,R0RY,K0R3,Y0AL,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C006,Markina-Xemein,Markina,Bizkaia,UR06,UI06,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C010,Vitoria-Gasteiz,Abetxuko-CHE,Álava,CHP10,CHN10,UR10,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C009,Galdakao,Galdakao,Bizkaia,UR09,R0EL,UI09,G477,,,,,,,,,,,,,,,,,20221003,GAUGING
+C011,Mungia,Mungia-Lauaxeta,Bizkaia,UI11,RA11,RM11,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C016,Vitoria-Gasteiz,Arkauti,Álava,S008,K0AM,Y0AT,G471,R0EV,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C00B,Valdegovía/Gaubea,Tobillas,Álava,R0DZ,G439,K0AR,ISCM,Y041,,,,,,,,,,,,,,,,20221003,GAUGING
+C00A,Campezo/Kanpezu,Kanpezu,Álava,R0FN,G458,K0AQ,Y0AJ,,,,,,,,,,,,,,,,,20240527,METEOROLOGICAL
+C012,Vitoria-Gasteiz,Zurbano-Alegría-CHE,Álava,CHN12,UR12,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C00C,Legutio,Goiain,Álava,G403,K0AO,Y012,R0R9,UL0C,IS0C,,,,,,,,,,,,,,,20230324,GAUGING
+C017,Donostia / San Sebastián,Miramon,Gipuzkoa,K0RA,G4DB,R0D0,Y011,,,,,,,,,,,,,,,,,20230405,METEOROLOGICAL
+C022,Abadiño,Urkiola,Bizkaia,G416,G411,K0AJ,Y064,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C019,Bermeo,Matxitxako,Bizkaia,R0FM,Y0BW,K048,G455,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C018,Hondarribia,Higer,Gipuzkoa,K0AS,Y093,R0FT,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C024,Agurain/Salvatierra,Iturrieta,Álava,G4AE,R0BV,K038,S042,Y0RB,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C023,Arrasate/Mondragón,Arrasate,Gipuzkoa,Y024,R0CY,K0S8,G4AS,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C020,Condado de Treviño,Trebiño,Burgos,G426,R026,K0AE,Y0R1,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C021,Arraia-Maeztu,Roitegi,Álava,Y001,R0CI,,,,,,,,,,,,,,,,,,,20240612,METEOROLOGICAL
+C027,Laudio/Llodio,Llodio,Álava,G4RG,R0AV,Y0AV,R0BD,K610,G453,G4AO,R0CR,,,,,,,,,,,,,20210505,METEOROLOGICAL
+C029,Zizurkil,Zizurkil,Gipuzkoa,K041,R0GG,G4AB,Y0AP,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C030,Agurain/Salvatierra,Salvatierra,Álava,G447,R0DY,K013,Y064,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C025,Urkabustaiz,Beluntza,Álava,Y0CM,R0CM,,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C028,Zegama,Zegama,Gipuzkoa,G4AF,Y0R8,R0RE,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C032,Orozko,Areta,Bizkaia,UL32,R0GP,I032,G450,Y064,,,,,,,,,,,,,,,,20221003,GAUGING
+C026,Berastegi,Berastegi,Gipuzkoa,K026,Y0DB,G4B3,R0GB,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C031,Moreda de Álava/Moreda Araba,Moreda,Álava,YEE6,G4D2,R0SM,K612,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C039,Bilbao,Deusto,Bizkaia,S009,K0AN,Y0BH,NT39,G4AM,R0GB,,,,,,,,,,,,,,,20220217,METEOROLOGICAL
+C035,Zuia,Altube,Álava,Y0BF,G4AF,R0AX,S001,K0AD,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C037,Arrigorriaga,Venta Alta,Bizkaia,R0BF,K093,Y030,G4B3,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C038,Sestao,Galindo,Bizkaia,Y0W1,G442,R0ED,,,,,,,,,,,,,,,,,,20231221,METEOROLOGICAL
+C03A,Bilbao,Zorrotza,Bizkaia,Y0B4,CS3A,S0AG,R0BB,G4E7,K0AY,,,,,,,,,,,,,,,20221225,METEOROLOGICAL
+C033,Igorre,Igorre,Bizkaia,Y005,R0RU,K033,G4RD,,,,,,,,,,,,,,,,,20240527,METEOROLOGICAL
+C034,Valdegovía/Gaubea,Espejo,Álava,Y048,R0D0,K0AX,G4AR,,,,,,,,,,,,,,,,,20230915,METEOROLOGICAL
+C036,Iurreta,Iurreta,Bizkaia,R0BJ,Y0RG,K0AP,G467,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C044,Zigoitia,Gorbea,Álava,G403,R0BF,ISA3,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C041,Bernedo,Navarrete,Álava,Y005,G497,R0GF,K602,,,,,,,,,,,,,,,,,20240527,METEOROLOGICAL
+C045,Balmaseda,La Garbea,Bizkaia,G4RF,R0GE,Y0BR,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C040,Vitoria-Gasteiz,Gasteiz,Álava,Y045,K026,R0GC,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C042,Getxo,Punta Galea,Bizkaia,G437,Y0CV,S0AC,R0HG,K0R6,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C043,Ordizia,Ordizia,Gipuzkoa,G4AG,R0FU,K612,Y0AQ,S040,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C046,Munitibar-Arbatzegi Gerrikaitz,Oiz,Bizkaia,G414,R016,Y0BP,,,,,,,,,,,,,,,,,,20230623,METEOROLOGICAL
+C047,Bernedo,Kapildui,Álava,Y0BX,R0BS,G4RA,,,,,,,,,,,,,,,,,,20231123,METEOROLOGICAL
+C048,Lagrán,Herrera,Álava,Y0CT,R0EY,K0AZ,G4R2,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C052,Berastegi,Ameraun,Gipuzkoa,R0CC,G4AL,ISR7,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C053,Zeanuri,Barazar,Bizkaia,R008,Y0R5,K045,G444,,,,,,,,,,,,,,,,,20080410,METEOROLOGICAL
+C049,Erriberagoitia/Ribera Alta,Subijana,Álava,K0AL,R0RY,G4R9,Y033,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C054,Otxandio,Otxandio,Bizkaia,UL54,IS74,K054,G4AQ,Y0AN,R0DO,,,,,,,,,,,,,,,20221003,GAUGING
+C051,Amurrio,Saratxo,Álava,RM51,ISAJ,Y0R5,R0RE,K0AT,G4B1,,,,,,,,,,,,,,,20221003,GAUGING
+C050,Berantevilla,Zambrana,Álava,R0R2,YE17,G410,K613,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C055,Barrundia,Ozaeta,Álava,UL55,IS55,R0DE,G4RB,,,,,,,,,,,,,,,,,20221003,GAUGING
+C061,Valle de Trápaga-Trapagaran,Arboleda,Bizkaia,R0CE,K0AW,G498,Y0DQ,,,,,,,,,,,,,,,,,20240527,METEOROLOGICAL
+C060,Laguardia,Páganos,Álava,R0GO,Y0R5,S0AE,K0S6,G478,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C057,Mungia,Mungia,Bizkaia,NP57,OR57,NR57,NM57,NO57,NT57,FT57,NA57,NC57,RC57,G4D0,NI57,K0AU,R0GF,Y011,,,,,,20221223,GAUGING
+C059,Valle de Mena,Ordunte,Burgos,G458,Y0CJ,R0SA,UL59,K0R9,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C056,Alegría-Dulantzi,Alegría,Álava,G4AI,R0HZ,IS56,Y0BN,RM02,,,,,,,,,,,,,,,,20221130,GAUGING
+C058,Bidania-Goiatz,Bidania,Gipuzkoa,K607,Y0BE,G460,R0FF,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C064,Zarautz,Zarautz,Gipuzkoa,R0SG,Y005,G499,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C063,Muxika,Muxika,Bizkaia,NR63,OR63,NT63,FT63,G4R7,ISAM,NC63,R0BT,NM63,NO63,NP63,NI63,RM63,,,,,,,,20240603,QUALITY
+C068,Asparrena,Ilarduia,Álava,Y0BZ,R0GD,G4R1,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C069,Bermeo,Almike (Bermeo),Bizkaia,R014,K0R7,G4E5,Y033,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C071,Lezo,Jaizkibel,Gipuzkoa,Y0BT,R0BU,,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C072,Urduña/Orduña,Orduña,Bizkaia,G4AD,Y028,R0SC,,,,,,,,,,,,,,,,,,20221219,METEOROLOGICAL
+C067,Laudio/Llodio,Gardea,Álava,NR67,NT67,NM67,NO67,NP67,NA67,NC67,G4R8,Y006,ISBM,ISB3,RM67,R0W1,,,,,,,,20230417,QUALITY
+C065,Karrantza Harana/Valle de Carranza,Cerroja,Bizkaia,R0GM,S0AD,K610,G4AN,Y0BR,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C066,Orozko,Untzueta,Bizkaia,R0FL,Y0DK,,,,,,,,,,,,,,,,,,,20240617,METEOROLOGICAL
+C070,Vitoria-Gasteiz,Zaldiaran,Álava,R0EN,Y0DG,G411,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C075,Zaldibar,Eitzaga,Bizkaia,G4AG,Y037,R0SG,R0AF,R0DI,R0EJ,R003,R0BM,G4AB,,,,,,,,,,,,20210505,METEOROLOGICAL
+C079,Amorebieta-Etxano,Amorebieta,Bizkaia,NP79,NA79,ISAZ,NR79,NC79,NM79,R016,NO79,NI79,G4EC,RM79,NT79,,,,,,,,,20221003,QUALITY
+C076,Vitoria-Gasteiz,Abetxuko,Álava,IS70,R0EQ,G4B1,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C073,Mallabia,Mallabia,Bizkaia,Y0CW,G470,R0FR,,,,,,,,,,,,,,,,,,20221013,METEOROLOGICAL
+C074,Elorrio,Elorrio,Bizkaia,R0BK,NA74,NR74,G418,NC74,NT74,NM74,NO74,NP74,ISBT,,,,,,,,,,,20221003,QUALITY
+C080,Oiartzun,Añarbe,Gipuzkoa,IS80,R0CY,G4AL,,,,,,,,,,,,,,,,,,20231219,QUALITY
+C077,Andoain,Andoain,Gipuzkoa,NR77,NC77,NT77,R007,NO77,NP77,RM77,ISAC,G4C4,,,,,,,,,,,,20240624,QUALITY
+C078,Elgoibar,Altzola,Gipuzkoa,NR78,OR78,NT78,NM78,NO78,NP78,SS78,R0SB,G444,NA78,NC78,ISBO,RM78,,,,,,,,20221003,QUALITY
+C085,Eibar,Eibar,Gipuzkoa,IS99,RA85,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C083,Irun,Jaizubia,Gipuzkoa,I083,UL83,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0A0,Zuia,Sarria,Álava,R0HQ,ISB9,G429,,,,,,,,,,,,,,,,,,20230620,GAUGING
+C084,Irun,Behobia,Gipuzkoa,G4AD,R0RY,RA01,,,,,,,,,,,,,,,,,,20230214,GAUGING
+C086,Zarautz,Inurritza,Gipuzkoa,R0GX,IS86,G476,,,,,,,,,,,,,,,,,,20230613,GAUGING
+C0A1,Peñacerrada-Urizaharra,Pagoeta,Álava,ISA1,URA1,R0W1,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C082,Donostia / San Sebastián,Txomin Enea,Gipuzkoa,CS82,UL82,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C081,Donostia / San Sebastián,Martutene,Gipuzkoa,CS81,UL81,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0B2,Zaratamo,Zaratamo,Bizkaia,NRB2,NCB2,NTB2,NOB2,NPB2,NAB2,NMB2,RMB2,NIB2,,,,,,,,,,,,20230420,QUALITY
+C0AB,Iruña Oka/Iruña de Oca,Nanclares,Álava,G426,Y037,K0AV,ISAB,R0CA,ULAB,,,,,,,,,,,,,,,20221003,GAUGING
+C0A2,Asparrena,Egino,Álava,ISA2,R030,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0A3,Campezo/Kanpezu,Antoñana,Álava,R0BR,ISBS,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0B0,Bilbao,La Merced,Bizkaia,PR02,,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0AA,Barrundia,Etura,Álava,NRAA,NCAA,NTAA,G4AI,NOAA,R0A6,NPAA,NAAA,SRAA,ISP4,K091,Y0DC,,,,,,,,,20221003,GAUGING
+C0B1,Arrigorriaga,Abusu,Bizkaia,NCB1,NTB1,NOB1,G4AI,NPB1,NAB1,NRB1,ISCT,NMB1,RMB1,NIB1,R0FP,,,,,,,,,20221003,QUALITY
+C0BA,Amoroto,Oleta,Bizkaia,NTBA,ISCY,NOBA,NPBA,NRBA,ORBA,FTBA,NCBA,R0CX,G418,NABA,NMBA,RM02,NIBA,,,,,,,20221116,QUALITY
+C0A4,Condado de Treviño,Albaina,Burgos,R0EH,IS23,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0B3,Igorre,Urkizu,Bizkaia,ISAJ,R0AO,RMR1,G4C5,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0B7,Izurtza,Mañaria,Bizkaia,RMB7,ISF7,R012,G4C2,,,,,,,,,,,,,,,,,20221003,QUALITY
+C0B8,Getxo,Larrainazubi,Bizkaia,RA03,R0HJ,G4DB,ULB8,,,,,,,,,,,,,,,,,20240624,GAUGING
+B094,Getaria,Puerto de Getaria,Gipuzkoa,MO02,TA02,VV02,CT14,CT13,CT12,CT11,CT10,DV02,MI00,RN02,SP02,CB17,HA02,CB16,CB15,CB14,CB13,CB12,,20210524,BUOY
+C0B6,Iurreta,Berna,Bizkaia,R0A4,RMB6,G467,,,,,,,,,,,,,,,,,,20221003,METEOROLOGICAL
+C0B4,Orozko,Orozko,Bizkaia,IS70,R0AG,G417,Y0R5,RMB4,,,,,,,,,,,,,,,,20221003,GAUGING
+C0B9,Sondika,Sangroniz,Bizkaia,ISAY,R007,ISF7,G4AC,,,,,,,,,,,,,,,,,20230405,GAUGING
+C0B5,Iurreta,Oromino,Bizkaia,IS20,,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0C4,Güeñes,Sodupe-Herrerias,Bizkaia,NRC4,NCC4,NTC4,NMC4,ISFB,NOC4,NPC4,RMC4,,,,,,,,,,,,,20231219,QUALITY
+C0C3,Güeñes,Sodupe-Cadagua,Bizkaia,NRC3,NCC3,NTC3,NOC3,Y0RG,NPC3,G4AO,NMC3,R0DQ,NIC3,,,,,,,,,,,20240527,QUALITY
+B093,Ondarroa,Puerto de Ondarroa,Bizkaia,CB22,MO03,CB21,CB20,CT19,SP03,CT18,CT17,CT16,CT15,VV03,DV03,TA03,CB19,CB18,RN03,MI03,HA03,CB23,,20210524,BUOY
+C0C0,Zalla,Zalla,Bizkaia,ISC0,G4D0,RAC0,R0ET,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0BD,Ziortza-Bolibar,Iruzubieta,Bizkaia,G458,R0R2,IEAD,ISBW,,,,,,,,,,,,,,,,,20240527,GAUGING
+C0BE,Berriatua,Berriatua,Bizkaia,NOBE,NPBE,NRBE,ORBE,NMBE,G4AA,NTBE,ISAF,FTBE,PABE,NIBE,NCBE,R0FA,,,,,,,,20240409,QUALITY
+C0C5,Galdames,Arenao,Bizkaia,UIC5,RAC5,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0C1,Zalla,Aranguren,Bizkaia,ISCS,RMC1,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+B098,Mutriku,Mutriku,Gipuzkoa,Y0BX,K0S2,R0CB,,,,,,,,,,,,,,,,,,20221003,BUOY
+C0C2,Balmaseda,Balmaseda,Bizkaia,NCC2,NTC2,ULC2,NOC2,NPC2,R0DF,NRC2,ISCR,ISCW,G467,,,,,,,,,,,20231220,QUALITY
+C0D1,Oñati,Oñati,Gipuzkoa,G404,NRD1,NCD1,NTD1,NMD1,R0BB,NOD1,PRD1,NPD1,RMD1,,,,,,,,,,,20221003,QUALITY
+C0D0,Aretxabaleta,Urkulu,Gipuzkoa,R0SK,RMD0,G451,RMD1,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0DB,Zumarraga,Aitzu,Gipuzkoa,R0AH,G480,ISBN,RMDB,,,,,,,,,,,,,,,,,20221003,QUALITY
+C0C7,Trucios-Turtzioz,Cueto,Bizkaia,PUC7,R0SM,,,,,,,,,,,,,,,,,,,20240605,METEOROLOGICAL
+C0C6,Sopuerta,Jarralta,Bizkaia,R085,PUC6,,,,,,,,,,,,,,,,,,,20240605,METEOROLOGICAL
+C0D2,Bergara,San Prudentzio,Gipuzkoa,NTD2,NPD2,ORD2,NAD2,G4R9,NRD2,R0BD,NCD2,NMD2,ISD2,NOD2,RMD2,,,,,,,,,20230419,QUALITY
+B091,Lemoiz,Puerto de Armintza,Bizkaia,MO04,MI04,RN04,SP04,CT24,VV04,CT23,CT22,CT21,CT20,DV04,TA04,CB29,CB28,CB27,CB26,HA04,CB25,CB24,,20210526,BUOY
+C0C8,Aulesti,Aulesti,Bizkaia,RAC8,URC8,,,,,,,,,,,,,,,,,,,20240605,METEOROLOGICAL
+C0D3,Elorrio,Aixola,Bizkaia,G4AE,RMD3,R0RN,ISBF,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0E8,Lizartza,Araxes,Gipuzkoa,NOE8,NPE8,NRE8,R0RG,ISBQ,G433,NCE8,NTE8,ULE8,,,,,,,,,,,,20221003,GAUGING
+C0DC,Azpeitia,Ibai Eder,Gipuzkoa,IS06,R0Z1,K011,G496,RMDC,,,,,,,,,,,,,,,,20221003,QUALITY
+C0E7,Beasain,Estanda,Gipuzkoa,PRE7,R0HN,RME7,G457,,,,,,,,,,,,,,,,,20221003,QUALITY
+C0DD,Zestoa,Aizarnazabal,Gipuzkoa,NRDD,NTDD,NODD,NPDD,ORDD,SSDD,PRDD,NCDD,NADD,G4F4,NMDD,R0CB,RMDD,,,,,,,,20221003,QUALITY
+C0E1,Zaldibia,Amundarain,Gipuzkoa,NRE1,ULE1,NCE1,G4F0,NTD1,NOE1,R0FG,NPE1,SSE1,DRE1,,,,,,,,,,,20221003,GAUGING
+C0E5,Ataun,Agauntza,Gipuzkoa,PRE5,R0CD,RME5,G4AP,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0DE,Beasain,Matxinbenta,Gipuzkoa,R0HK,G4C1,ISBP,,,,,,,,,,,,,,,,,,20230616,GAUGING
+C0E9,Alegia,Alegia,Gipuzkoa,NOE9,NPE9,SSE9,NAE9,PRE9,NME9,G4D0,RME9,R0RP,NRE9,NCE9,NTE9,,,,,,,,,20221003,QUALITY
+E001,Zeanuri,Undurraga,Bizkaia,RME1,CAE1,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0F1,Goizueta,Eskas,Navarra,R0RU,GIF1,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0F4,Errenteria,Oiartzun,Gipuzkoa,NTF4,G4RG,NPF4,NRF4,NCF4,SSF4,ISF4,NOF4,RMF4,R0RM,,,,,,,,,,,20230314,QUALITY
+C0EC,Lasarte-Oria,Lasarte,Gipuzkoa,NPEC,NREC,ISEC,G415,Y0BD,K605,NAEC,NCEC,SSEC,NMEC,R0BC,NOEC,RMEC,,,,,,,,20221003,QUALITY
+M09A,Bermeo,Mareógrafo Bermeo,Bizkaia,IS9A,,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0F0,Hernani,Ereñozu,Gipuzkoa,Y0R4,R0Z0,RMF0,NTF0,NPF0,PRF0,NRF0,G4DB,NCF0,SSF0,NOF0,,,,,,,,,,20221003,QUALITY
+E000,Zeanuri,Olabarria,Bizkaia,NIE0,CAE0,,,,,,,,,,,,,,,,,,,20221003,GAUGING
+C0EA,Belauntza,Belauntza,Gipuzkoa,RMEA,NREA,NCEA,NTEA,NOEA,NPEA,G4D2,ISR1,R0FQ,,,,,,,,,,,,20221003,QUALITY
