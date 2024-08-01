@@ -6,11 +6,12 @@ import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_predict, KFold
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
+from scikeras.wrappers import KerasRegressor
 
 
 # Dataset
@@ -26,127 +27,119 @@ df_precipitaciones = df_meteo[df_meteo['medida'] == 'precipitation']
 df_velocidad_media_viento = df_meteo[df_meteo['medida'] == 'mean_speed']
 df_direccion_viento = df_meteo[df_meteo['medida'] == 'direction_sigma']
 
+# Metodo llamado para invocar red neuronal
+def red_neuronal():
+    # Acceder a modelo_red_neuronal
+    global modelo_red_neuronal
+    # Condicion para crear el modelo
+    if modelo_red_neuronal is None:
+        # Red neuronal
+        modelo_red_neuronal = Sequential()
+        modelo_red_neuronal.add(Dense(512, activation='relu', input_dim=5))
+        modelo_red_neuronal.add(Dropout(0.1))
+        modelo_red_neuronal.add(Dense(512, activation='relu'))
+        modelo_red_neuronal.add(Dropout(0.1))
+        modelo_red_neuronal.add(Dense(1, activation='linear'))
+        # Compilar modelo
+        modelo_red_neuronal.compile(optimizer='adam', loss='mse', metrics=['mae'])
+        # Resumen del modelo
+        modelo_red_neuronal.summary()
+    # Devuelve modelo, creado o global
+    return modelo_red_neuronal
+
 # Metodo llamado desde analisis
 def analisis_meteo():
     # Regresion lineal
     modelo_RL = LinearRegression()
-
-    # Red neuronal
-    modelo_RN = Sequential()
-    modelo_RN.add(Dense(512, activation='relu', input_dim=5))
-    modelo_RN.add(Dropout(0.1))
-    modelo_RN.add(Dense(512, activation='relu'))
-    modelo_RN.add(Dropout(0.1))
-    modelo_RN.add(Dense(1, activation='linear'))
-    # Compilar modelo
-    modelo_RN.compile(optimizer='adam', loss='mse', metrics=['mae'])
-    # Resumen del modelo
-    modelo_RN.summary()
-
     # Random Forest
     modelo_RF = RandomForestRegressor(n_estimators=128)
+    # Red neuronal
+    modelo_RN = KerasRegressor(model=red_neuronal, epochs=400, batch_size=64, verbose=0)
 
-
-    # DIAGRAMA DE CORRELACION
-    # --------------------- #
-    # Listado de los nombres de los DFs divididos
-    df_divididos = [df_humedad, df_temperatura, df_superficial_wetting, df_visibilidad, df_precipitaciones, df_velocidad_media_viento, df_direccion_viento]
-    # Bucle para recorrer todos los DFs
-    for df in df_divididos:
-        # Obtener unicamente los campos numericos
-        df_sin_textos = df.select_dtypes(include=['number'])
-        # Dimensiones
-        plt.figure(figsize=(10, 8)) 
-        # Graficar matriz de correlacion
-        correlation_matrix = df_sin_textos.corr()
-        # Estetica
-        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
-        plt.title(f'Matriz de Correlacion {df}')
-        plt.show()
+    # K-Fold (tecnica de validacion cruzada)
+    kf = KFold(n_splits=5, shuffle=True)
 
 
     # PREDICCION HUMEDAD #
     # ------------------ #
     # Division de columnas del DF
-    X_humedad = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
-    Y_humedad = df_meteo['media']
+    X_humedad = df_humedad[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    Y_humedad = df_humedad['media']
 
-    # Division de datos
-    X_humedad_train, X_humedad_test, Y_humedad_train, Y_humedad_test = train_test_split(X_humedad, Y_humedad, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_humedad_train, Y_humedad_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_humedad_train, Y_humedad_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_humedad_train, Y_humedad_train)
+    # Cross Validation RL
+    predicciones_RL_humedad = cross_val_predict(modelo_RL, X_humedad, Y_humedad, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_humedad = cross_val_predict(modelo_RF, X_humedad, Y_humedad, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_humedad = cross_val_predict(modelo_RN, X_humedad, Y_humedad, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_humedad = modelo_RL.predict(X_humedad_test)
-    # Prediccion RN
-    prediccion_RN_humedad = modelo_RN.predict(X_humedad_test)
-    # Prediccion RF
-    prediccion_RF_humedad = modelo_RF.predict(X_humedad_test)
+    prediccion_RL_humedad = predicciones_RL_humedad.mean()
+    # Prediccion RL
+    prediccion_RF_humedad = predicciones_RF_humedad.mean()
+    # Prediccion RL
+    prediccion_RN_humedad = predicciones_RN_humedad.mean()
 
-    # Evaluacion RN
-    mse_RN_humedad, mae_RN_humedad = modelo_RN.evaluate(X_humedad_test, Y_humedad_test)
-
-    # Metricas
-    mae_RL_humedad = mean_absolute_error(Y_humedad_test, prediccion_RL_humedad)
-    mse_RL_humedad = mean_squared_error(Y_humedad_test, prediccion_RL_humedad)
-    r2_RN_humedad = r2_score(Y_humedad_test, prediccion_RN_humedad)
-    r2_RL_humedad = r2_score(Y_humedad_test, prediccion_RL_humedad)
-    mae_RF_humedad = mean_absolute_error(Y_humedad_test, prediccion_RF_humedad)
-    mse_RF_humedad = mean_squared_error(Y_humedad_test, prediccion_RF_humedad)
-    r2_RF_humedad = r2_score(Y_humedad_test, prediccion_RF_humedad)
-
+    # Metricas RL
+    mse_RL_humedad = mean_squared_error(Y_humedad, predicciones_RL_humedad)
+    mae_RL_humedad = mean_absolute_error(Y_humedad, predicciones_RL_humedad)
+    r2_RL_humedad = r2_score(Y_humedad, predicciones_RL_humedad)
+    # Metricas RF
+    mse_RF_humedad = mean_squared_error(Y_humedad, predicciones_RF_humedad)
+    mae_RF_humedad = mean_absolute_error(Y_humedad, predicciones_RF_humedad)
+    r2_RF_humedad = r2_score(Y_humedad, predicciones_RF_humedad)
+    # Metricas RN
+    mse_RN_humedad = mean_squared_error(Y_humedad, predicciones_RN_humedad)
+    mae_RN_humedad = mean_absolute_error(Y_humedad, predicciones_RN_humedad)
+    r2_RN_humedad = r2_score(Y_humedad, predicciones_RN_humedad)
+    
     # Impresion
     print(f'Humedad')
-    print(f'RL: {mse_RL_humedad} | {mae_RL_humedad} | {r2_RL_humedad}')
-    print(f'RN: {mse_RN_humedad} | {mae_RN_humedad} | {r2_RN_humedad}')
-    print(f'RF: {mse_RF_humedad} | {mae_RF_humedad} | {r2_RF_humedad}')
+    print(f'MSE: RL-> {mse_RL_humedad} | RF-> {mse_RF_humedad}  | RN-> {mse_RN_humedad}')
+    print(f'MAE: RL-> {mae_RL_humedad} | RF-> {mae_RF_humedad} | RN-> {mae_RN_humedad}')
+    print(f'R2: RL-> {r2_RL_humedad} | RF-> {r2_RF_humedad} | RN-> {r2_RN_humedad}')
+    print(f'Predicciones: RL-> {prediccion_RL_humedad} | RF-> {prediccion_RF_humedad} | RN-> {prediccion_RN_humedad}')
 
 
     # PREDICCION TEMPERATURA #
     # ---------------------- #
     # Division de columnas del DF
-    X_temperatura = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
-    Y_temperatura = df_meteo['media']
+    X_temperatura = df_temperatura[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
+    Y_temperatura = df_temperatura['media']
 
-    # Division de datos
-    X_temperatura_train, X_temperatura_test, Y_temperatura_train, Y_temperatura_test = train_test_split(X_temperatura, Y_temperatura, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_temperatura_train, Y_temperatura_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_temperatura_train, Y_temperatura_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_temperatura_train, Y_temperatura_train)
+    # Cross Validation RL
+    predicciones_RL_temperatura = cross_val_predict(modelo_RL, X_temperatura, Y_temperatura, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_temperatura = cross_val_predict(modelo_RF, X_temperatura, Y_temperatura, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_temperatura = cross_val_predict(modelo_RN, X_temperatura, Y_temperatura, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_temperatura = modelo_RL.predict(X_temperatura_test)
-    # Prediccion RN
-    prediccion_RN_temperatura = modelo_RN.predict(X_temperatura_test)
-    # Prediccion RF
-    prediccion_RF_temperatura = modelo_RF.predict(X_temperatura_test)
+    prediccion_RL_temperatura = predicciones_RL_temperatura.mean()
+    # Prediccion RL
+    prediccion_RF_temperatura = predicciones_RF_temperatura.mean()
+    # Prediccion RL
+    prediccion_RN_temperatura = predicciones_RN_temperatura.mean()
 
-    # Evaluacion RN
-    mse_RN_temperatura, mae_RN_temperatura = modelo_RN.evaluate(X_temperatura_test, Y_temperatura_test)
-
-    # Metricas
-    mae_RL_temperatura = mean_absolute_error(Y_temperatura_test, prediccion_RL_temperatura)
-    mse_RL_temperatura = mean_squared_error(Y_temperatura_test, prediccion_RL_temperatura)
-    r2_RN_temperatura = r2_score(Y_temperatura_test, prediccion_RN_temperatura)
-    r2_RL_temperatura = r2_score(Y_temperatura_test, prediccion_RL_temperatura)
-    mae_RF_temperatura = mean_absolute_error(Y_temperatura_test, prediccion_RF_temperatura)
-    mse_RF_temperatura = mean_squared_error(Y_temperatura_test, prediccion_RF_temperatura)
-    r2_RF_temperatura = r2_score(Y_temperatura_test, prediccion_RF_temperatura)
-
+    # Metricas RL
+    mse_RL_temperatura = mean_squared_error(Y_temperatura, predicciones_RL_temperatura)
+    mae_RL_temperatura = mean_absolute_error(Y_temperatura, predicciones_RL_temperatura)
+    r2_RL_temperatura = r2_score(Y_temperatura, predicciones_RL_temperatura)
+    # Metricas RF
+    mse_RF_temperatura = mean_squared_error(Y_temperatura, predicciones_RF_temperatura)
+    mae_RF_temperatura = mean_absolute_error(Y_temperatura, predicciones_RF_temperatura)
+    r2_RF_temperatura = r2_score(Y_temperatura, predicciones_RF_temperatura)
+    # Metricas RN
+    mse_RN_temperatura = mean_squared_error(Y_temperatura, predicciones_RN_temperatura)
+    mae_RN_temperatura = mean_absolute_error(Y_temperatura, predicciones_RN_temperatura)
+    r2_RN_temperatura = r2_score(Y_temperatura, predicciones_RN_temperatura)
+    
     # Impresion
     print(f'Temperatura')
-    print(f'RL: {mse_RL_temperatura} | {mae_RL_temperatura} | {r2_RL_temperatura}')
-    print(f'RN: {mse_RN_temperatura} | {mae_RN_temperatura} | {r2_RN_temperatura}')
-    print(f'RF: {mse_RF_temperatura} | {mae_RF_temperatura} | {r2_RF_temperatura}')
+    print(f'MSE: RL-> {mse_RL_temperatura} | RF-> {mse_RF_temperatura}  | RN-> {mse_RN_temperatura}')
+    print(f'MAE: RL-> {mae_RL_temperatura} | RF-> {mae_RF_temperatura} | RN-> {mae_RN_temperatura}')
+    print(f'R2: RL-> {r2_RL_temperatura} | RF-> {r2_RF_temperatura} | RN-> {r2_RN_temperatura}')
+    print(f'Predicciones: RL-> {prediccion_RL_temperatura} | RF-> {prediccion_RF_temperatura} | RN-> {prediccion_RN_temperatura}')
 
 
     # PREDICCION SW #
@@ -155,40 +148,39 @@ def analisis_meteo():
     X_SW = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_SW = df_meteo['media']
 
-    # Division de datos
-    X_SW_train, X_SW_test, Y_SW_train, Y_SW_test = train_test_split(X_SW, Y_SW, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_SW_train, Y_SW_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_SW_train, Y_SW_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_SW_train, Y_SW_train)
+    # Cross Validation RL
+    predicciones_RL_SW = cross_val_predict(modelo_RL, X_SW, Y_SW, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_SW = cross_val_predict(modelo_RF, X_SW, Y_SW, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_SW = cross_val_predict(modelo_RN, X_SW, Y_SW, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_SW = modelo_RL.predict(X_SW_test)
-    # Prediccion RN
-    prediccion_RN_SW = modelo_RN.predict(X_SW_test)
-    # Prediccion RF
-    prediccion_RF_SW = modelo_RF.predict(X_SW_test)
+    prediccion_RL_SW = predicciones_RL_SW.mean()
+    # Prediccion RL
+    prediccion_RF_SW = predicciones_RF_SW.mean()
+    # Prediccion RL
+    prediccion_RN_SW = predicciones_RN_SW.mean()
 
-    # Evaluacion RN
-    mse_RN_SW, mae_RN_SW = modelo_RN.evaluate(X_SW_test, Y_SW_test)
-
-    # Metricas
-    mae_RL_SW = mean_absolute_error(Y_SW_test, prediccion_RL_SW)
-    mse_RL_SW = mean_squared_error(Y_SW_test, prediccion_RL_SW)
-    r2_RN_SW = r2_score(Y_SW_test, prediccion_RN_SW)
-    r2_RL_SW = r2_score(Y_SW_test, prediccion_RL_SW)
-    mae_RF_SW = mean_absolute_error(Y_SW_test, prediccion_RF_SW)
-    mse_RF_SW = mean_squared_error(Y_SW_test, prediccion_RF_SW)
-    r2_RF_SW = r2_score(Y_SW_test, prediccion_RF_SW)
-
+    # Metricas RL
+    mse_RL_SW = mean_squared_error(Y_SW, predicciones_RL_SW)
+    mae_RL_SW = mean_absolute_error(Y_SW, predicciones_RL_SW)
+    r2_RL_SW = r2_score(Y_SW, predicciones_RL_SW)
+    # Metricas RF
+    mse_RF_SW = mean_squared_error(Y_SW, predicciones_RF_SW)
+    mae_RF_SW = mean_absolute_error(Y_SW, predicciones_RF_SW)
+    r2_RF_SW = r2_score(Y_SW, predicciones_RF_SW)
+    # Metricas RN
+    mse_RN_SW = mean_squared_error(Y_SW, predicciones_RN_SW)
+    mae_RN_SW = mean_absolute_error(Y_SW, predicciones_RN_SW)
+    r2_RN_SW = r2_score(Y_SW, predicciones_RN_SW)
+    
     # Impresion
-    print(f'Supperficial wetting')
-    print(f'RL: {mse_RL_SW} | {mae_RL_SW} | {r2_RL_SW}')
-    print(f'RN: {mse_RN_SW} | {mae_RN_SW} | {r2_RN_SW}')
-    print(f'RF: {mse_RF_SW} | {mae_RF_SW} | {r2_RF_SW}')
+    print(f'Superficial wetting')
+    print(f'MSE: RL-> {mse_RL_SW} | RF-> {mse_RF_SW}  | RN-> {mse_RN_SW}')
+    print(f'MAE: RL-> {mae_RL_SW} | RF-> {mae_RF_SW} | RN-> {mae_RN_SW}')
+    print(f'R2: RL-> {r2_RL_SW} | RF-> {r2_RF_SW} | RN-> {r2_RN_SW}')
+    print(f'Predicciones: RL-> {prediccion_RL_SW} | RF-> {prediccion_RF_SW} | RN-> {prediccion_RN_SW}')
 
 
     # PREDICCION VISIBILIDAD #
@@ -197,40 +189,39 @@ def analisis_meteo():
     X_visibilidad = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_visibilidad = df_meteo['media']
 
-    # Division de datos
-    X_visibilidad_train, X_visibilidad_test, Y_visibilidad_train, Y_visibilidad_test = train_test_split(X_visibilidad, Y_visibilidad, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_visibilidad_train, Y_visibilidad_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_visibilidad_train, Y_visibilidad_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_visibilidad_train, Y_visibilidad_train)
+    # Cross Validation RL
+    predicciones_RL_visibilidad = cross_val_predict(modelo_RL, X_visibilidad, Y_visibilidad, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_visibilidad = cross_val_predict(modelo_RF, X_visibilidad, Y_visibilidad, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_visibilidad = cross_val_predict(modelo_RN, X_visibilidad, Y_visibilidad, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_visibilidad = modelo_RL.predict(X_visibilidad_test)
-    # Prediccion RN
-    prediccion_RN_visibilidad = modelo_RN.predict(X_visibilidad_test)
-    # Prediccion RF
-    prediccion_RF_visibilidad = modelo_RF.predict(X_visibilidad_test)
+    prediccion_RL_visibilidad = predicciones_RL_visibilidad.mean()
+    # Prediccion RL
+    prediccion_RF_visibilidad = predicciones_RF_visibilidad.mean()
+    # Prediccion RL
+    prediccion_RN_visibilidad = predicciones_RN_visibilidad.mean()
 
-    # Evaluacion RN
-    mse_RN_visibilidad, mae_RN_visibilidad = modelo_RN.evaluate(X_visibilidad_test, Y_visibilidad_test)
-
-    # Metricas
-    mae_RL_visibilidad = mean_absolute_error(Y_visibilidad_test, prediccion_RL_visibilidad)
-    mse_RL_visibilidad = mean_squared_error(Y_visibilidad_test, prediccion_RL_visibilidad)
-    r2_RN_visibilidad = r2_score(Y_visibilidad_test, prediccion_RN_visibilidad)
-    r2_RL_visibilidad = r2_score(Y_visibilidad_test, prediccion_RL_visibilidad)
-    mae_RF_visibilidad = mean_absolute_error(Y_visibilidad_test, prediccion_RF_visibilidad)
-    mse_RF_visibilidad = mean_squared_error(Y_visibilidad_test, prediccion_RF_visibilidad)
-    r2_RF_visibilidad = r2_score(Y_visibilidad_test, prediccion_RF_visibilidad)
-
+    # Metricas RL
+    mse_RL_visibilidad = mean_squared_error(Y_visibilidad, predicciones_RL_visibilidad)
+    mae_RL_visibilidad = mean_absolute_error(Y_visibilidad, predicciones_RL_visibilidad)
+    r2_RL_visibilidad = r2_score(Y_visibilidad, predicciones_RL_visibilidad)
+    # Metricas RF
+    mse_RF_visibilidad = mean_squared_error(Y_visibilidad, predicciones_RF_visibilidad)
+    mae_RF_visibilidad = mean_absolute_error(Y_visibilidad, predicciones_RF_visibilidad)
+    r2_RF_visibilidad = r2_score(Y_visibilidad, predicciones_RF_visibilidad)
+    # Metricas RN
+    mse_RN_visibilidad = mean_squared_error(Y_visibilidad, predicciones_RN_visibilidad)
+    mae_RN_visibilidad = mean_absolute_error(Y_visibilidad, predicciones_RN_visibilidad)
+    r2_RN_visibilidad = r2_score(Y_visibilidad, predicciones_RN_visibilidad)
+    
     # Impresion
     print(f'Visibilidad')
-    print(f'RL: {mse_RL_visibilidad} | {mae_RL_visibilidad} | {r2_RL_visibilidad}')
-    print(f'RN: {mse_RN_visibilidad} | {mae_RN_visibilidad} | {r2_RN_visibilidad}')
-    print(f'RF: {mse_RF_visibilidad} | {mae_RF_visibilidad} | {r2_RF_visibilidad}')
+    print(f'MSE: RL-> {mse_RL_visibilidad} | RF-> {mse_RF_visibilidad}  | RN-> {mse_RN_visibilidad}')
+    print(f'MAE: RL-> {mae_RL_visibilidad} | RF-> {mae_RF_visibilidad} | RN-> {mae_RN_visibilidad}')
+    print(f'R2: RL-> {r2_RL_visibilidad} | RF-> {r2_RF_visibilidad} | RN-> {r2_RN_visibilidad}')
+    print(f'Predicciones: RL-> {prediccion_RL_visibilidad} | RF-> {prediccion_RF_visibilidad} | RN-> {prediccion_RN_visibilidad}')
 
 
     # PREDICCION PRECIPITACIONES #
@@ -239,40 +230,39 @@ def analisis_meteo():
     X_precipitaciones = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_precipitaciones = df_meteo['media']
 
-    # Division de datos
-    X_precipitaciones_train, X_precipitaciones_test, Y_precipitaciones_train, Y_precipitaciones_test = train_test_split(X_precipitaciones, Y_precipitaciones, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_precipitaciones_train, Y_precipitaciones_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_precipitaciones_train, Y_precipitaciones_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_precipitaciones_train, Y_precipitaciones_train)
+    # Cross Validation RL
+    predicciones_RL_precipitaciones = cross_val_predict(modelo_RL, X_precipitaciones, Y_precipitaciones, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_precipitaciones = cross_val_predict(modelo_RF, X_precipitaciones, Y_precipitaciones, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_precipitaciones = cross_val_predict(modelo_RN, X_precipitaciones, Y_precipitaciones, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_precipitaciones = modelo_RL.predict(X_precipitaciones_test)
-    # Prediccion RN
-    prediccion_RN_precipitaciones = modelo_RN.predict(X_precipitaciones_test)
-    # Prediccion RF
-    prediccion_RF_precipitaciones = modelo_RF.predict(X_precipitaciones_test)
+    prediccion_RL_precipitaciones = predicciones_RL_precipitaciones.mean()
+    # Prediccion RL
+    prediccion_RF_precipitaciones = predicciones_RF_precipitaciones.mean()
+    # Prediccion RL
+    prediccion_RN_precipitaciones = predicciones_RN_precipitaciones.mean()
 
-    # Evaluacion RN
-    mse_RN_precipitaciones, mae_RN_precipitaciones = modelo_RN.evaluate(X_precipitaciones_test, Y_precipitaciones_test)
-
-    # Metricas
-    mae_RL_precipitaciones = mean_absolute_error(Y_precipitaciones_test, prediccion_RL_precipitaciones)
-    mse_RL_precipitaciones = mean_squared_error(Y_precipitaciones_test, prediccion_RL_precipitaciones)
-    r2_RN_precipitaciones = r2_score(Y_precipitaciones_test, prediccion_RN_precipitaciones)
-    r2_RL_precipitaciones = r2_score(Y_precipitaciones_test, prediccion_RL_precipitaciones)
-    mae_RF_precipitaciones = mean_absolute_error(Y_precipitaciones_test, prediccion_RF_precipitaciones)
-    mse_RF_precipitaciones = mean_squared_error(Y_precipitaciones_test, prediccion_RF_precipitaciones)
-    r2_RF_precipitaciones = r2_score(Y_precipitaciones_test, prediccion_RF_precipitaciones)
-
+    # Metricas RL
+    mse_RL_precipitaciones = mean_squared_error(Y_precipitaciones, predicciones_RL_precipitaciones)
+    mae_RL_precipitaciones = mean_absolute_error(Y_precipitaciones, predicciones_RL_precipitaciones)
+    r2_RL_precipitaciones = r2_score(Y_precipitaciones, predicciones_RL_precipitaciones)
+    # Metricas RF
+    mse_RF_precipitaciones = mean_squared_error(Y_precipitaciones, predicciones_RF_precipitaciones)
+    mae_RF_precipitaciones = mean_absolute_error(Y_precipitaciones, predicciones_RF_precipitaciones)
+    r2_RF_precipitaciones = r2_score(Y_precipitaciones, predicciones_RF_precipitaciones)
+    # Metricas RN
+    mse_RN_precipitaciones = mean_squared_error(Y_precipitaciones, predicciones_RN_precipitaciones)
+    mae_RN_precipitaciones = mean_absolute_error(Y_precipitaciones, predicciones_RN_precipitaciones)
+    r2_RN_precipitaciones = r2_score(Y_precipitaciones, predicciones_RN_precipitaciones)
+    
     # Impresion
     print(f'Precipitaciones')
-    print(f'RL: {mse_RL_precipitaciones} | {mae_RL_precipitaciones} | {r2_RL_precipitaciones}')
-    print(f'RN: {mse_RN_precipitaciones} | {mae_RN_precipitaciones} | {r2_RN_precipitaciones}')
-    print(f'RF: {mse_RF_precipitaciones} | {mae_RF_precipitaciones} | {r2_RF_precipitaciones}')
+    print(f'MSE: RL-> {mse_RL_precipitaciones} | RF-> {mse_RF_precipitaciones}  | RN-> {mse_RN_precipitaciones}')
+    print(f'MAE: RL-> {mae_RL_precipitaciones} | RF-> {mae_RF_precipitaciones} | RN-> {mae_RN_precipitaciones}')
+    print(f'R2: RL-> {r2_RL_precipitaciones} | RF-> {r2_RF_precipitaciones} | RN-> {r2_RN_precipitaciones}')
+    print(f'Predicciones: RL-> {prediccion_RL_precipitaciones} | RF-> {prediccion_RF_precipitaciones} | RN-> {prediccion_RN_precipitaciones}')
 
 
     # PREDICCION VELOCIDAD MEDIA VIENTO #
@@ -281,40 +271,39 @@ def analisis_meteo():
     X_vel_media_viento = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_vel_media_viento = df_meteo['media']
 
-    # Division de datos
-    X_vel_media_viento_train, X_vel_media_viento_test, Y_vel_media_viento_train, Y_vel_media_viento_test = train_test_split(X_vel_media_viento, Y_vel_media_viento, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_vel_media_viento_train, Y_vel_media_viento_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_vel_media_viento_train, Y_vel_media_viento_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_vel_media_viento_train, Y_vel_media_viento_train)
+    # Cross Validation RL
+    predicciones_RL_vel_media_viento = cross_val_predict(modelo_RL, X_vel_media_viento, Y_vel_media_viento, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_vel_media_viento = cross_val_predict(modelo_RF, X_vel_media_viento, Y_vel_media_viento, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_vel_media_viento = cross_val_predict(modelo_RN, X_vel_media_viento, Y_vel_media_viento, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_vel_media_viento = modelo_RL.predict(X_vel_media_viento_test)
-    # Prediccion RN
-    prediccion_RN_vel_media_viento = modelo_RN.predict(X_vel_media_viento_test)
-    # Prediccion RF
-    prediccion_RF_vel_media_viento = modelo_RF.predict(X_vel_media_viento_test)
+    prediccion_RL_vel_media_viento = predicciones_RL_vel_media_viento.mean()
+    # Prediccion RL
+    prediccion_RF_vel_media_viento = predicciones_RF_vel_media_viento.mean()
+    # Prediccion RL
+    prediccion_RN_vel_media_viento = predicciones_RN_vel_media_viento.mean()
 
-    # Evaluacion RN
-    mse_RN_vel_media_viento, mae_RN_vel_media_viento = modelo_RN.evaluate(X_vel_media_viento_test, Y_vel_media_viento_test)
-
-    # Metricas
-    mae_RL_vel_media_viento = mean_absolute_error(Y_vel_media_viento_test, prediccion_RL_vel_media_viento)
-    mse_RL_vel_media_viento = mean_squared_error(Y_vel_media_viento_test, prediccion_RL_vel_media_viento)
-    r2_RN_vel_media_viento = r2_score(Y_vel_media_viento_test, prediccion_RN_vel_media_viento)
-    r2_RL_vel_media_viento = r2_score(Y_vel_media_viento_test, prediccion_RL_vel_media_viento)
-    mae_RF_vel_media_viento = mean_absolute_error(Y_vel_media_viento_test, prediccion_RF_vel_media_viento)
-    mse_RF_vel_media_viento = mean_squared_error(Y_vel_media_viento_test, prediccion_RF_vel_media_viento)
-    r2_RF_vel_media_viento = r2_score(Y_vel_media_viento_test, prediccion_RF_vel_media_viento)
-
+    # Metricas RL
+    mse_RL_vel_media_viento = mean_squared_error(Y_vel_media_viento, predicciones_RL_vel_media_viento)
+    mae_RL_vel_media_viento = mean_absolute_error(Y_vel_media_viento, predicciones_RL_vel_media_viento)
+    r2_RL_vel_media_viento = r2_score(Y_vel_media_viento, predicciones_RL_vel_media_viento)
+    # Metricas RF
+    mse_RF_vel_media_viento = mean_squared_error(Y_vel_media_viento, predicciones_RF_vel_media_viento)
+    mae_RF_vel_media_viento = mean_absolute_error(Y_vel_media_viento, predicciones_RF_vel_media_viento)
+    r2_RF_vel_media_viento = r2_score(Y_vel_media_viento, predicciones_RF_vel_media_viento)
+    # Metricas RN
+    mse_RN_vel_media_viento = mean_squared_error(Y_vel_media_viento, predicciones_RN_vel_media_viento)
+    mae_RN_vel_media_viento = mean_absolute_error(Y_vel_media_viento, predicciones_RN_vel_media_viento)
+    r2_RN_vel_media_viento = r2_score(Y_vel_media_viento, predicciones_RN_vel_media_viento)
+    
     # Impresion
-    print(f'Velocidad media del viento')
-    print(f'RL: {mse_RL_vel_media_viento} | {mae_RL_vel_media_viento} | {r2_RL_vel_media_viento}')
-    print(f'RN: {mse_RN_vel_media_viento} | {mae_RN_vel_media_viento} | {r2_RN_vel_media_viento}')
-    print(f'RF: {mse_RF_vel_media_viento} | {mae_RF_vel_media_viento} | {r2_RF_vel_media_viento}')
+    print(f'Velocidad media viento')
+    print(f'MSE: RL-> {mse_RL_vel_media_viento} | RF-> {mse_RF_vel_media_viento}  | RN-> {mse_RN_vel_media_viento}')
+    print(f'MAE: RL-> {mae_RL_vel_media_viento} | RF-> {mae_RF_vel_media_viento} | RN-> {mae_RN_vel_media_viento}')
+    print(f'R2: RL-> {r2_RL_vel_media_viento} | RF-> {r2_RF_vel_media_viento} | RN-> {r2_RN_vel_media_viento}')
+    print(f'Predicciones: RL-> {prediccion_RL_vel_media_viento} | RF-> {prediccion_RF_vel_media_viento} | RN-> {prediccion_RN_vel_media_viento}')
 
 
     # PREDICCION DIRECCION VIENTO #
@@ -323,37 +312,36 @@ def analisis_meteo():
     X_direccion_viento = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
     Y_direccion_viento = df_meteo['media']
 
-    # Division de datos
-    X_direccion_viento_train, X_direccion_viento_test, Y_direccion_viento_train, Y_direccion_viento_test = train_test_split(X_direccion_viento, Y_direccion_viento, test_size=0.2)
-
-    # Entrenamiento RL
-    modelo_RL.fit(X_direccion_viento_train, Y_direccion_viento_train)
-    # Entrenamiento RN
-    modelo_RN.fit(X_direccion_viento_train, Y_direccion_viento_train, epochs=400, batch_size=64, verbose=0)
-    # Entrenamiento RF
-    modelo_RF.fit(X_direccion_viento_train, Y_direccion_viento_train)
+    # Cross Validation RL
+    predicciones_RL_direccion_viento = cross_val_predict(modelo_RL, X_direccion_viento, Y_direccion_viento, cv=kf)
+    # Cross Validation RF
+    predicciones_RF_direccion_viento = cross_val_predict(modelo_RF, X_direccion_viento, Y_direccion_viento, cv=kf)
+    # Cross Validation RN
+    predicciones_RN_direccion_viento = cross_val_predict(modelo_RN, X_direccion_viento, Y_direccion_viento, cv=kf)
 
     # Prediccion RL
-    prediccion_RL_direccion_viento = modelo_RL.predict(X_direccion_viento_test)
-    # Prediccion RN
-    prediccion_RN_direccion_viento = modelo_RN.predict(X_direccion_viento_test)
-    # Prediccion RF
-    prediccion_RF_direccion_viento = modelo_RF.predict(X_direccion_viento_test)
+    prediccion_RL_direccion_viento = predicciones_RL_direccion_viento.mean()
+    # Prediccion RL
+    prediccion_RF_direccion_viento = predicciones_RF_direccion_viento.mean()
+    # Prediccion RL
+    prediccion_RN_direccion_viento = predicciones_RN_direccion_viento.mean()
 
-    # Evaluacion RN
-    mse_RN_direccion_viento, mae_RN_direccion_viento = modelo_RN.evaluate(X_direccion_viento_test, Y_direccion_viento_test)
-
-    # Metricas
-    mae_RL_direccion_viento = mean_absolute_error(Y_direccion_viento_test, prediccion_RL_direccion_viento)
-    mse_RL_direccion_viento = mean_squared_error(Y_direccion_viento_test, prediccion_RL_direccion_viento)
-    r2_RN_direccion_viento = r2_score(Y_direccion_viento_test, prediccion_RN_direccion_viento)
-    r2_RL_direccion_viento = r2_score(Y_direccion_viento_test, prediccion_RL_direccion_viento)
-    mae_RF_direccion_viento = mean_absolute_error(Y_direccion_viento_test, prediccion_RF_direccion_viento)
-    mse_RF_direccion_viento = mean_squared_error(Y_direccion_viento_test, prediccion_RF_direccion_viento)
-    r2_RF_direccion_viento = r2_score(Y_direccion_viento_test, prediccion_RF_direccion_viento)
-
+    # Metricas RL
+    mse_RL_direccion_viento = mean_squared_error(Y_direccion_viento, predicciones_RL_direccion_viento)
+    mae_RL_direccion_viento = mean_absolute_error(Y_direccion_viento, predicciones_RL_direccion_viento)
+    r2_RL_direccion_viento = r2_score(Y_direccion_viento, predicciones_RL_direccion_viento)
+    # Metricas RF
+    mse_RF_direccion_viento = mean_squared_error(Y_direccion_viento, predicciones_RF_direccion_viento)
+    mae_RF_direccion_viento = mean_absolute_error(Y_direccion_viento, predicciones_RF_direccion_viento)
+    r2_RF_direccion_viento = r2_score(Y_direccion_viento, predicciones_RF_direccion_viento)
+    # Metricas RN
+    mse_RN_direccion_viento = mean_squared_error(Y_direccion_viento, predicciones_RN_direccion_viento)
+    mae_RN_direccion_viento = mean_absolute_error(Y_direccion_viento, predicciones_RN_direccion_viento)
+    r2_RN_direccion_viento = r2_score(Y_direccion_viento, predicciones_RN_direccion_viento)
+    
     # Impresion
-    print(f'Direccion del viento')
-    print(f'RL: {mse_RL_direccion_viento} | {mae_RL_direccion_viento} | {r2_RL_direccion_viento}')
-    print(f'RN: {mse_RN_direccion_viento} | {mae_RN_direccion_viento} | {r2_RN_direccion_viento}')
-    print(f'RF: {mse_RF_direccion_viento} | {mae_RF_direccion_viento} | {r2_RF_direccion_viento}')
+    print(f'Direccion viento')
+    print(f'MSE: RL-> {mse_RL_direccion_viento} | RF-> {mse_RF_direccion_viento}  | RN-> {mse_RN_direccion_viento}')
+    print(f'MAE: RL-> {mae_RL_direccion_viento} | RF-> {mae_RF_direccion_viento} | RN-> {mae_RN_direccion_viento}')
+    print(f'R2: RL-> {r2_RL_direccion_viento} | RF-> {r2_RF_direccion_viento} | RN-> {r2_RN_direccion_viento}')
+    print(f'Predicciones: RL-> {prediccion_RL_direccion_viento} | RF-> {prediccion_RF_direccion_viento} | RN-> {prediccion_RN_direccion_viento}')

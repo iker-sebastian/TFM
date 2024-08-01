@@ -2,11 +2,10 @@
 import bdd
 import pandas as pd
 
-from sklearn import datasets, metrics
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import cross_val_predict, cross_val_score, KFold
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, make_scorer
+from sklearn.model_selection import cross_val_predict, KFold
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout

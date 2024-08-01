@@ -10,7 +10,10 @@ import analisis_30_estaciones
 import analisis_32_incidencias
 #import analisis_33_meteo
 
-#array_df = [analisis_10_flows.df_flows, analisis_20_calidad_aire.df_calidad_aire, analisis_30_estaciones.df_estaciones, analisis_32_incidencias.df_incidencias, analisis_33_meteo.df_meteo] 
+'''array_df = [analisis_10_flows.df_flows, analisis_20_calidad_aire.df_calidad_aire, analisis_30_estaciones.df_estaciones,
+analisis_32_incidencias.df_incidencias, analisis_33_meteo.df_humedad, analisis_33_meteo.df_temperatura, 
+analisis_33_meteo.df_superficial_wetting, analisis_33_meteo.df_visibilidad, analisis_33_meteo.df_precipitaciones,
+analisis_33_meteo.df_velocidad_media_viento, analisis_33_meteo.df_direccion_viento]'''
 array_df = [analisis_10_flows.df_flows]
 # ------------------------------- ANALISIS EXPLORATORIO COMUN ------------------------------------------ #
 
