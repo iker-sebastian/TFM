@@ -52,3 +52,6 @@ def analisis_incidencias():
     df_incidencias['clave_union'] = df_incidencias['startDate'].dt.date.astype(str) + '_' + df_incidencias['province'] + '_' + df_incidencias['incidenceType']
     # Merge de df_incidencias con df_group_by_date
     df_incidencias = df_incidencias.merge(df_group_by_date[['clave_union', 'nivel_incidencias']], on='clave_union', how='left')
+
+    # Insercion incidencias despues del analisis
+    bdd.coleccion_analisis_incidencias.insert_many(df_incidencias.to_dict('records'))

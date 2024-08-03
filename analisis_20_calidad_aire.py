@@ -1,6 +1,7 @@
 # Imports
 import bdd
 import pandas as pd
+import config
 
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -101,6 +102,26 @@ def analisis_calidad_aire():
     print(f'R2: RL-> {r2_RL_Tolueno} | RF-> {r2_RF_Tolueno} | RN-> {r2_RN_Tolueno}')
     print(f'Predicciones: RL-> {prediccion_RL_Tolueno} | RF-> {prediccion_RF_Tolueno} | RN-> {prediccion_RN_Tolueno}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'Tolueno',
+            'MSE RL': mse_RL_Tolueno,
+            'MSE RF': mse_RF_Tolueno,
+            'MSE RN': mse_RN_Tolueno,
+            'MAE RL': mae_RL_Tolueno,
+            'MAE RF': mae_RF_Tolueno,
+            'MAE RN': mae_RN_Tolueno,
+            'R2 RL': r2_RL_Tolueno,
+            'R2 RL': r2_RF_Tolueno,
+            'R2 RL': r2_RN_Tolueno,
+            'Prediccion RL': prediccion_RL_Tolueno,
+            'Prediccion RF': prediccion_RF_Tolueno,
+            'Prediccion RN': prediccion_RN_Tolueno,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_meteo_cal_aire.append(doc)
+
 
     # PREDICCION SO2 #
     # -------------- #
@@ -142,6 +163,25 @@ def analisis_calidad_aire():
     print(f'R2: RL-> {r2_RL_SO2} | RF-> {r2_RF_SO2} | RN-> {r2_RN_SO2}')
     print(f'Predicciones: RL-> {prediccion_RL_SO2} | RF-> {prediccion_RF_SO2} | RN-> {prediccion_RN_SO2}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'SO2',
+            'MSE RL': mse_RL_SO2,
+            'MSE RF': mse_RF_SO2,
+            'MSE RN': mse_RN_SO2,
+            'MAE RL': mae_RL_SO2,
+            'MAE RF': mae_RF_SO2,
+            'MAE RN': mae_RN_SO2,
+            'R2 RL': r2_RL_SO2,
+            'R2 RL': r2_RF_SO2,
+            'R2 RL': r2_RN_SO2,
+            'Prediccion RL': prediccion_RL_SO2,
+            'Prediccion RF': prediccion_RF_SO2,
+            'Prediccion RN': prediccion_RN_SO2,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_meteo_cal_aire.append(doc)
 
     # PREDICCION PM25 #
     # --------------- #
@@ -183,6 +223,25 @@ def analisis_calidad_aire():
     print(f'R2: RL-> {r2_RL_PM2_5} | RF-> {r2_RF_PM2_5} | RN-> {r2_RN_PM2_5}')
     print(f'Predicciones: RL-> {prediccion_RL_PM2_5} | RF-> {prediccion_RF_PM2_5} | RN-> {prediccion_RN_PM2_5}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'PM2,5',
+            'MSE RL': mse_RL_PM2_5,
+            'MSE RF': mse_RF_PM2_5,
+            'MSE RN': mse_RN_PM2_5,
+            'MAE RL': mae_RL_PM2_5,
+            'MAE RF': mae_RF_PM2_5,
+            'MAE RN': mae_RN_PM2_5,
+            'R2 RL': r2_RL_PM2_5,
+            'R2 RL': r2_RF_PM2_5,
+            'R2 RL': r2_RN_PM2_5,
+            'Prediccion RL': prediccion_RL_PM2_5,
+            'Prediccion RF': prediccion_RF_PM2_5,
+            'Prediccion RN': prediccion_RN_PM2_5,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_meteo_cal_aire.append(doc)
 
     # PREDICCION PM10 #
     # --------------- #
@@ -224,6 +283,25 @@ def analisis_calidad_aire():
     print(f'R2: RL-> {r2_RL_PM10} | RF-> {r2_RF_PM10} | RN-> {r2_RN_PM10}')
     print(f'Predicciones: RL-> {prediccion_RL_PM10} | RF-> {prediccion_RF_PM10} | RN-> {prediccion_RN_PM10}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'PM10',
+            'MSE RL': mse_RL_PM10,
+            'MSE RF': mse_RF_PM10,
+            'MSE RN': mse_RN_PM10,
+            'MAE RL': mae_RL_PM10,
+            'MAE RF': mae_RF_PM10,
+            'MAE RN': mae_RN_PM10,
+            'R2 RL': r2_RL_PM10,
+            'R2 RL': r2_RF_PM10,
+            'R2 RL': r2_RN_PM10,
+            'Prediccion RL': prediccion_RL_PM10,
+            'Prediccion RF': prediccion_RF_PM10,
+            'Prediccion RN': prediccion_RN_PM10,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_meteo_cal_aire.append(doc)
 
     # PREDICCION 03 8h #
     # ---------------- #
@@ -265,6 +343,25 @@ def analisis_calidad_aire():
     print(f'R2: RL-> {r2_RL_03_8h} | RF-> {r2_RF_03_8h} | RN-> {r2_RN_03_8h}')
     print(f'Predicciones: RL-> {prediccion_RL_03_8h} | RF-> {prediccion_RF_03_8h} | RN-> {prediccion_RN_03_8h}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': '03 8h',
+            'MSE RL': mse_RL_03_8h,
+            'MSE RF': mse_RF_03_8h,
+            'MSE RN': mse_RN_03_8h,
+            'MAE RL': mae_RL_03_8h,
+            'MAE RF': mae_RF_03_8h,
+            'MAE RN': mae_RN_03_8h,
+            'R2 RL': r2_RL_03_8h,
+            'R2 RL': r2_RF_03_8h,
+            'R2 RL': r2_RN_03_8h,
+            'Prediccion RL': prediccion_RL_03_8h,
+            'Prediccion RF': prediccion_RF_03_8h,
+            'Prediccion RN': prediccion_RN_03_8h,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_meteo_cal_aire.append(doc)
 
     # PREDICCION NOX #
     # -------------- #
@@ -305,3 +402,28 @@ def analisis_calidad_aire():
     print(f'MAE: RL-> {mae_RL_NOX} | RF-> {mae_RF_NOX} | RN-> {mae_RN_NOX}')
     print(f'R2: RL-> {r2_RL_NOX} | RF-> {r2_RF_NOX} | RN-> {r2_RN_NOX}')
     print(f'Predicciones: RL-> {prediccion_RL_NOX} | RF-> {prediccion_RF_NOX} | RN-> {prediccion_RN_NOX}')
+
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'NOX',
+            'MSE RL': mse_RL_NOX,
+            'MSE RF': mse_RF_NOX,
+            'MSE RN': mse_RN_NOX,
+            'MAE RL': mae_RL_NOX,
+            'MAE RF': mae_RF_NOX,
+            'MAE RN': mae_RN_NOX,
+            'R2 RL': r2_RL_NOX,
+            'R2 RL': r2_RF_NOX,
+            'R2 RL': r2_RN_NOX,
+            'Prediccion RL': prediccion_RL_NOX,
+            'Prediccion RF': prediccion_RF_NOX,
+            'Prediccion RN': prediccion_RN_NOX,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_meteo_cal_aire.append(doc)
+
+    # Insercion calidad aire despues del analisis
+    for doc in config.array_dic_analisis_meteo_cal_aire:
+        # Actualiza el documento si existe '_id', si no inserta datos
+        bdd.coleccion_analisis_calidad_aire.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)

@@ -1,6 +1,7 @@
 # Imports
 import bdd
 import pandas as pd
+import config
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -102,6 +103,26 @@ def analisis_meteo():
     print(f'R2: RL-> {r2_RL_humedad} | RF-> {r2_RF_humedad} | RN-> {r2_RN_humedad}')
     print(f'Predicciones: RL-> {prediccion_RL_humedad} | RF-> {prediccion_RF_humedad} | RN-> {prediccion_RN_humedad}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'Humedad',
+            'MSE RL': mse_RL_humedad,
+            'MSE RF': mse_RF_humedad,
+            'MSE RN': mse_RN_humedad,
+            'MAE RL': mae_RL_humedad,
+            'MAE RF': mae_RF_humedad,
+            'MAE RN': mae_RN_humedad,
+            'R2 RL': r2_RL_humedad,
+            'R2 RL': r2_RF_humedad,
+            'R2 RL': r2_RN_humedad,
+            'Prediccion RL': prediccion_RL_humedad,
+            'Prediccion RF': prediccion_RF_humedad,
+            'Prediccion RN': prediccion_RN_humedad,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
+
 
     # PREDICCION TEMPERATURA #
     # ---------------------- #
@@ -142,6 +163,26 @@ def analisis_meteo():
     print(f'MAE: RL-> {mae_RL_temperatura} | RF-> {mae_RF_temperatura} | RN-> {mae_RN_temperatura}')
     print(f'R2: RL-> {r2_RL_temperatura} | RF-> {r2_RF_temperatura} | RN-> {r2_RN_temperatura}')
     print(f'Predicciones: RL-> {prediccion_RL_temperatura} | RF-> {prediccion_RF_temperatura} | RN-> {prediccion_RN_temperatura}')
+
+     # Creacion diccionario con datos
+    doc = {
+            'medida': 'Temperatura',
+            'MSE RL': mse_RL_temperatura,
+            'MSE RF': mse_RF_temperatura,
+            'MSE RN': mse_RN_temperatura,
+            'MAE RL': mae_RL_temperatura,
+            'MAE RF': mae_RF_temperatura,
+            'MAE RN': mae_RN_temperatura,
+            'R2 RL': r2_RL_temperatura,
+            'R2 RL': r2_RF_temperatura,
+            'R2 RL': r2_RN_temperatura,
+            'Prediccion RL': prediccion_RL_temperatura,
+            'Prediccion RF': prediccion_RF_temperatura,
+            'Prediccion RN': prediccion_RN_temperatura,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
 
 
     # PREDICCION SW #
@@ -184,6 +225,26 @@ def analisis_meteo():
     print(f'R2: RL-> {r2_RL_SW} | RF-> {r2_RF_SW} | RN-> {r2_RN_SW}')
     print(f'Predicciones: RL-> {prediccion_RL_SW} | RF-> {prediccion_RF_SW} | RN-> {prediccion_RN_SW}')
 
+    # Creacion diccionario con datos
+    doc = {
+            'medida': 'Humectacion superficial',
+            'MSE RL': mse_RL_SW,
+            'MSE RF': mse_RF_SW,
+            'MSE RN': mse_RN_SW,
+            'MAE RL': mae_RL_SW,
+            'MAE RF': mae_RF_SW,
+            'MAE RN': mae_RN_SW,
+            'R2 RL': r2_RL_SW,
+            'R2 RL': r2_RF_SW,
+            'R2 RL': r2_RN_SW,
+            'Prediccion RL': prediccion_RL_SW,
+            'Prediccion RF': prediccion_RF_SW,
+            'Prediccion RN': prediccion_RN_SW,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
+
 
     # PREDICCION VISIBILIDAD #
     # ---------------------- #
@@ -224,6 +285,25 @@ def analisis_meteo():
     print(f'MAE: RL-> {mae_RL_visibilidad} | RF-> {mae_RF_visibilidad} | RN-> {mae_RN_visibilidad}')
     print(f'R2: RL-> {r2_RL_visibilidad} | RF-> {r2_RF_visibilidad} | RN-> {r2_RN_visibilidad}')
     print(f'Predicciones: RL-> {prediccion_RL_visibilidad} | RF-> {prediccion_RF_visibilidad} | RN-> {prediccion_RN_visibilidad}')
+
+    doc = {
+            'medida': 'Visibilidad',
+            'MSE RL': mse_RL_visibilidad,
+            'MSE RF': mse_RF_visibilidad,
+            'MSE RN': mse_RN_visibilidad,
+            'MAE RL': mae_RL_visibilidad,
+            'MAE RF': mae_RF_visibilidad,
+            'MAE RN': mae_RN_visibilidad,
+            'R2 RL': r2_RL_visibilidad,
+            'R2 RL': r2_RF_visibilidad,
+            'R2 RL': r2_RN_visibilidad,
+            'Prediccion RL': prediccion_RL_visibilidad,
+            'Prediccion RF': prediccion_RF_visibilidad,
+            'Prediccion RN': prediccion_RN_visibilidad,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
 
 
     # PREDICCION PRECIPITACIONES #
@@ -266,6 +346,24 @@ def analisis_meteo():
     print(f'R2: RL-> {r2_RL_precipitaciones} | RF-> {r2_RF_precipitaciones} | RN-> {r2_RN_precipitaciones}')
     print(f'Predicciones: RL-> {prediccion_RL_precipitaciones} | RF-> {prediccion_RF_precipitaciones} | RN-> {prediccion_RN_precipitaciones}')
 
+    doc = {
+            'medida': 'Precipitaciones',
+            'MSE RL': mse_RL_precipitaciones,
+            'MSE RF': mse_RF_precipitaciones,
+            'MSE RN': mse_RN_precipitaciones,
+            'MAE RL': mae_RL_precipitaciones,
+            'MAE RF': mae_RF_precipitaciones,
+            'MAE RN': mae_RN_precipitaciones,
+            'R2 RL': r2_RL_precipitaciones,
+            'R2 RL': r2_RF_precipitaciones,
+            'R2 RL': r2_RN_precipitaciones,
+            'Prediccion RL': prediccion_RL_precipitaciones,
+            'Prediccion RF': prediccion_RF_precipitaciones,
+            'Prediccion RN': prediccion_RN_precipitaciones,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
 
     # PREDICCION VELOCIDAD MEDIA VIENTO #
     # --------------------------------- #
@@ -307,6 +405,24 @@ def analisis_meteo():
     print(f'R2: RL-> {r2_RL_vel_media_viento} | RF-> {r2_RF_vel_media_viento} | RN-> {r2_RN_vel_media_viento}')
     print(f'Predicciones: RL-> {prediccion_RL_vel_media_viento} | RF-> {prediccion_RF_vel_media_viento} | RN-> {prediccion_RN_vel_media_viento}')
 
+    doc = {
+            'medida': 'Velocidad media del viento',
+            'MSE RL': mse_RL_vel_media_viento,
+            'MSE RF': mse_RF_vel_media_viento,
+            'MSE RN': mse_RN_vel_media_viento,
+            'MAE RL': mae_RL_vel_media_viento,
+            'MAE RF': mae_RF_vel_media_viento,
+            'MAE RN': mae_RN_vel_media_viento,
+            'R2 RL': r2_RL_vel_media_viento,
+            'R2 RL': r2_RF_vel_media_viento,
+            'R2 RL': r2_RN_vel_media_viento,
+            'Prediccion RL': prediccion_RL_vel_media_viento,
+            'Prediccion RF': prediccion_RF_vel_media_viento,
+            'Prediccion RN': prediccion_RN_vel_media_viento,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
 
     # PREDICCION DIRECCION VIENTO #
     # --------------------------------- #
@@ -347,3 +463,27 @@ def analisis_meteo():
     print(f'MAE: RL-> {mae_RL_direccion_viento} | RF-> {mae_RF_direccion_viento} | RN-> {mae_RN_direccion_viento}')
     print(f'R2: RL-> {r2_RL_direccion_viento} | RF-> {r2_RF_direccion_viento} | RN-> {r2_RN_direccion_viento}')
     print(f'Predicciones: RL-> {prediccion_RL_direccion_viento} | RF-> {prediccion_RF_direccion_viento} | RN-> {prediccion_RN_direccion_viento}')
+
+    doc = {
+            'medida': 'Direccion del viento',
+            'MSE RL': mse_RL_direccion_viento,
+            'MSE RF': mse_RF_direccion_viento,
+            'MSE RN': mse_RN_direccion_viento,
+            'MAE RL': mae_RL_direccion_viento,
+            'MAE RF': mae_RF_direccion_viento,
+            'MAE RN': mae_RN_direccion_viento,
+            'R2 RL': r2_RL_direccion_viento,
+            'R2 RL': r2_RF_direccion_viento,
+            'R2 RL': r2_RN_direccion_viento,
+            'Prediccion RL': prediccion_RL_direccion_viento,
+            'Prediccion RF': prediccion_RF_direccion_viento,
+            'Prediccion RN': prediccion_RN_direccion_viento,
+        }
+    
+    # Añade el diccionario a un array
+    config.array_dic_analisis_datos_meteo.append(doc)
+
+    # Insercion datos meteorologicos despues del analisis
+    for doc in config.array_dic_analisis_datos_meteo:
+        # Actualiza el documento si existe '_id', si no inserta datos
+        bdd.coleccion_analisis_meteo.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)

@@ -45,6 +45,11 @@ array_dic_meteo_cal_aire = [] # Array donde se almacenan los diccionarios que co
 array_dic_estaciones = [] # Array donde se almacenan los diccionarios que contienen datos de las estaciones de euskalmet
 array_dic_datos_meteo = [] # Array donde se almacenan los diccionarios que contienen datos de euskalmet
 
+# Arrays con diccionarios despues del analisis
+array_dic_analisis_meteo_cal_aire = [] # Array donde se almacenan los diccionarios que contienen datos de la calidad del aire despues del analisis
+array_dic_analisis_incidencias = [] # Array donde se almacenan los diccionarios que contienen datos de las incidencias despues del analisis
+array_dic_analisis_datos_meteo = [] # Array donde se almacenan los diccionarios que contienen datos meteorologicos despues del analisis
+
 # Iteradores
 contador_pags = 1
 num_pag_meter = 1

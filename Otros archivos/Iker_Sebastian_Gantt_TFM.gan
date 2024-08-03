@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2024-08-03" view-index="0" gantt-divider-location="521" resource-divider-location="300" version="3.3.3309" locale="es_ES">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="360" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="86" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="74" order="2"/>
+        <field id="tpd15" name="Notas" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="210" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="be7f6d65e7fc4d218407ce7a32ff4f8b" name="Investigación para la recolección de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="1" uid="7ce7ab0d97f844ef8bb01541f550b795" name="Investigación para el procesamiento y limpieza de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="2" uid="d0c6121ba6d848288b82e16fd942574e" name="Investigación para el almacenamiento de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="3" uid="dfc33f50135e4c46a8db682fe3db3651" name="Investigación para el análisis de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="4" uid="754c876f8c894b25b4b03c335bf5c909" name="Investigación para la visualización de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="5" uid="7b48a5751abf4dff9b36cc1c05006f53" name="Conectividad con la base de datos." meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="6" uid="0f0d0a13036e4680a61625bf2f2046d6" name="Definición de las herramientas a utilizar" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="7" uid="55d8b9dc606a401d95ecb13c57bd860f" name="Definición de la arquitectura de la solución" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="8" uid="4a6ea0b608ab42258f6d5cdb6825ded6" name="Desarrollo de la recolección de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="9" uid="664ca6475a844000bdd870882c576112" name="Desarrollo del procesamiento y limpieza de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="10" uid="8e94cc3cea8f4dafaee45e20a58a2876" name="Desarrollo del almacenamiento de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="11" uid="759de5d7ef03411c95646a50c1cdd838" name="Desarrollo del análisis de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="12" uid="a7ba9ee0197e414aac480c292c92a12f" name="Desarrollo de la visualización de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="13" uid="b2c84276de95487990db84df7997d6f5" name="Pruebas en la recolección de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="14" uid="8071a3bfb1ba4f50a1b5db1d01a29d5d" name="Pruebas en el procesamiento y limpieza de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="15" uid="4767b056dc264e30818f84cbb40b9d9d" name="Pruebas en el almacenamiento de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="16" uid="291cbc7cd13246ceae1796e7c85db5b1" name="Pruebas en el análisis de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+        <task id="17" uid="d09af041e7514a919c9371997cca688b" name="Pruebas en la visualización de datos" meeting="false" start="2024-08-05" duration="1" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
