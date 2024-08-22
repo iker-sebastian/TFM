@@ -164,7 +164,7 @@ def analisis_meteo():
     print(f'R2: RL-> {r2_RL_temperatura} | RF-> {r2_RF_temperatura} | RN-> {r2_RN_temperatura}')
     print(f'Predicciones: RL-> {prediccion_RL_temperatura} | RF-> {prediccion_RF_temperatura} | RN-> {prediccion_RN_temperatura}')
 
-     # Creacion diccionario con datos
+    # Creacion diccionario con datos
     doc = {
             'medida': 'Temperatura',
             'MSE RL': mse_RL_temperatura,
@@ -179,127 +179,6 @@ def analisis_meteo():
             'Prediccion RL': prediccion_RL_temperatura,
             'Prediccion RF': prediccion_RF_temperatura,
             'Prediccion RN': prediccion_RN_temperatura,
-        }
-    
-    # Añade el diccionario a un array
-    config.array_dic_analisis_datos_meteo.append(doc)
-
-
-    # PREDICCION SW #
-    # ---------------------- #
-    # Division de columnas del DF
-    X_SW = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
-    Y_SW = df_meteo['media']
-
-    # Cross Validation RL
-    predicciones_RL_SW = cross_val_predict(modelo_RL, X_SW, Y_SW, cv=kf)
-    # Cross Validation RF
-    predicciones_RF_SW = cross_val_predict(modelo_RF, X_SW, Y_SW, cv=kf)
-    # Cross Validation RN
-    predicciones_RN_SW = cross_val_predict(modelo_RN, X_SW, Y_SW, cv=kf)
-
-    # Prediccion RL
-    prediccion_RL_SW = predicciones_RL_SW.mean()
-    # Prediccion RL
-    prediccion_RF_SW = predicciones_RF_SW.mean()
-    # Prediccion RL
-    prediccion_RN_SW = predicciones_RN_SW.mean()
-
-    # Metricas RL
-    mse_RL_SW = mean_squared_error(Y_SW, predicciones_RL_SW)
-    mae_RL_SW = mean_absolute_error(Y_SW, predicciones_RL_SW)
-    r2_RL_SW = r2_score(Y_SW, predicciones_RL_SW)
-    # Metricas RF
-    mse_RF_SW = mean_squared_error(Y_SW, predicciones_RF_SW)
-    mae_RF_SW = mean_absolute_error(Y_SW, predicciones_RF_SW)
-    r2_RF_SW = r2_score(Y_SW, predicciones_RF_SW)
-    # Metricas RN
-    mse_RN_SW = mean_squared_error(Y_SW, predicciones_RN_SW)
-    mae_RN_SW = mean_absolute_error(Y_SW, predicciones_RN_SW)
-    r2_RN_SW = r2_score(Y_SW, predicciones_RN_SW)
-    
-    # Impresion
-    print(f'Humectacion superficial')
-    print(f'MSE: RL-> {mse_RL_SW} | RF-> {mse_RF_SW}  | RN-> {mse_RN_SW}')
-    print(f'MAE: RL-> {mae_RL_SW} | RF-> {mae_RF_SW} | RN-> {mae_RN_SW}')
-    print(f'R2: RL-> {r2_RL_SW} | RF-> {r2_RF_SW} | RN-> {r2_RN_SW}')
-    print(f'Predicciones: RL-> {prediccion_RL_SW} | RF-> {prediccion_RF_SW} | RN-> {prediccion_RN_SW}')
-
-    # Creacion diccionario con datos
-    doc = {
-            'medida': 'Humectacion superficial',
-            'MSE RL': mse_RL_SW,
-            'MSE RF': mse_RF_SW,
-            'MSE RN': mse_RN_SW,
-            'MAE RL': mae_RL_SW,
-            'MAE RF': mae_RF_SW,
-            'MAE RN': mae_RN_SW,
-            'R2 RL': r2_RL_SW,
-            'R2 RL': r2_RF_SW,
-            'R2 RL': r2_RN_SW,
-            'Prediccion RL': prediccion_RL_SW,
-            'Prediccion RF': prediccion_RF_SW,
-            'Prediccion RN': prediccion_RN_SW,
-        }
-    
-    # Añade el diccionario a un array
-    config.array_dic_analisis_datos_meteo.append(doc)
-
-
-    # PREDICCION VISIBILIDAD #
-    # ---------------------- #
-    # Division de columnas del DF
-    X_visibilidad = df_meteo[['año', 'dia', 'max', 'max_acumulado', 'mes', 'min', 'total']]
-    Y_visibilidad = df_meteo['media']
-
-    # Cross Validation RL
-    predicciones_RL_visibilidad = cross_val_predict(modelo_RL, X_visibilidad, Y_visibilidad, cv=kf)
-    # Cross Validation RF
-    predicciones_RF_visibilidad = cross_val_predict(modelo_RF, X_visibilidad, Y_visibilidad, cv=kf)
-    # Cross Validation RN
-    predicciones_RN_visibilidad = cross_val_predict(modelo_RN, X_visibilidad, Y_visibilidad, cv=kf)
-
-    # Prediccion RL
-    prediccion_RL_visibilidad = predicciones_RL_visibilidad.mean()
-    # Prediccion RL
-    prediccion_RF_visibilidad = predicciones_RF_visibilidad.mean()
-    # Prediccion RL
-    prediccion_RN_visibilidad = predicciones_RN_visibilidad.mean()
-
-    # Metricas RL
-    mse_RL_visibilidad = mean_squared_error(Y_visibilidad, predicciones_RL_visibilidad)
-    mae_RL_visibilidad = mean_absolute_error(Y_visibilidad, predicciones_RL_visibilidad)
-    r2_RL_visibilidad = r2_score(Y_visibilidad, predicciones_RL_visibilidad)
-    # Metricas RF
-    mse_RF_visibilidad = mean_squared_error(Y_visibilidad, predicciones_RF_visibilidad)
-    mae_RF_visibilidad = mean_absolute_error(Y_visibilidad, predicciones_RF_visibilidad)
-    r2_RF_visibilidad = r2_score(Y_visibilidad, predicciones_RF_visibilidad)
-    # Metricas RN
-    mse_RN_visibilidad = mean_squared_error(Y_visibilidad, predicciones_RN_visibilidad)
-    mae_RN_visibilidad = mean_absolute_error(Y_visibilidad, predicciones_RN_visibilidad)
-    r2_RN_visibilidad = r2_score(Y_visibilidad, predicciones_RN_visibilidad)
-    
-    # Impresion
-    print(f'Visibilidad')
-    print(f'MSE: RL-> {mse_RL_visibilidad} | RF-> {mse_RF_visibilidad}  | RN-> {mse_RN_visibilidad}')
-    print(f'MAE: RL-> {mae_RL_visibilidad} | RF-> {mae_RF_visibilidad} | RN-> {mae_RN_visibilidad}')
-    print(f'R2: RL-> {r2_RL_visibilidad} | RF-> {r2_RF_visibilidad} | RN-> {r2_RN_visibilidad}')
-    print(f'Predicciones: RL-> {prediccion_RL_visibilidad} | RF-> {prediccion_RF_visibilidad} | RN-> {prediccion_RN_visibilidad}')
-
-    doc = {
-            'medida': 'Visibilidad',
-            'MSE RL': mse_RL_visibilidad,
-            'MSE RF': mse_RF_visibilidad,
-            'MSE RN': mse_RN_visibilidad,
-            'MAE RL': mae_RL_visibilidad,
-            'MAE RF': mae_RF_visibilidad,
-            'MAE RN': mae_RN_visibilidad,
-            'R2 RL': r2_RL_visibilidad,
-            'R2 RL': r2_RF_visibilidad,
-            'R2 RL': r2_RN_visibilidad,
-            'Prediccion RL': prediccion_RL_visibilidad,
-            'Prediccion RF': prediccion_RF_visibilidad,
-            'Prediccion RN': prediccion_RN_visibilidad,
         }
     
     # Añade el diccionario a un array

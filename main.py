@@ -20,8 +20,8 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
         futures = [
             executor.submit(run_10_flows),
-            #executor.submit(run_20_calidad_aire),
-            #executor.submit(run_30_meteorologia)
+            executor.submit(run_20_calidad_aire),
+            executor.submit(run_30_meteorologia)
         ]
         
         # Espera a que todas las funciones terminen

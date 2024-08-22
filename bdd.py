@@ -15,6 +15,7 @@ coleccion_estaciones = bdd['estaciones']
 coleccion_meteo = bdd['meteo']
 
 # Definicion de las colecciones de los datos procesados
+coleccion_analisis_flows = bdd['analisis_flows']
 coleccion_analisis_calidad_aire = bdd['analisis_calidad_aire']
 coleccion_analisis_incidencias = bdd['analisis_incidencias']
 coleccion_analisis_meteo = bdd['analisis_meteo']

@@ -1,6 +1,7 @@
 # Imports
 import bdd
 import pandas as pd
+import numpy as np
 import config
 
 from sklearn.linear_model import LinearRegression
@@ -79,8 +80,8 @@ def analisis_calidad_aire():
     prediccion_RL_Tolueno = predicciones_RL_Tolueno.mean()
     # Prediccion RL
     prediccion_RF_Tolueno = predicciones_RF_Tolueno.mean()
-    # Prediccion RL
-    prediccion_RN_Tolueno = predicciones_RN_Tolueno.mean()
+    # Prediccion RL y conversion a float estandar
+    prediccion_RN_Tolueno = np.mean(predicciones_RN_Tolueno).item()
 
     # Metricas RL
     mse_RL_Tolueno = mean_squared_error(Y_Tolueno, predicciones_RL_Tolueno)
@@ -140,8 +141,8 @@ def analisis_calidad_aire():
     prediccion_RL_SO2 = predicciones_RL_SO2.mean()
     # Prediccion RL
     prediccion_RF_SO2 = predicciones_RF_SO2.mean()
-    # Prediccion RL
-    prediccion_RN_SO2 = predicciones_RN_SO2.mean()
+    # Prediccion RL y conversion a float estandar
+    prediccion_RN_SO2 = np.mean(predicciones_RN_SO2).item()
 
     # Metricas RL
     mse_RL_SO2 = mean_squared_error(Y_SO2, predicciones_RL_SO2)
@@ -200,8 +201,8 @@ def analisis_calidad_aire():
     prediccion_RL_PM2_5 = predicciones_RL_PM2_5.mean()
     # Prediccion RL
     prediccion_RF_PM2_5 = predicciones_RF_PM2_5.mean()
-    # Prediccion RL
-    prediccion_RN_PM2_5 = predicciones_RN_PM2_5.mean()
+    # Prediccion RL y conversion a float estandar
+    prediccion_RN_PM2_5 = np.mean(predicciones_RN_PM2_5).item()
 
     # Metricas RL
     mse_RL_PM2_5 = mean_squared_error(Y_PM2_5, predicciones_RL_PM2_5)
@@ -260,8 +261,8 @@ def analisis_calidad_aire():
     prediccion_RL_PM10 = predicciones_RL_PM10.mean()
     # Prediccion RL
     prediccion_RF_PM10 = predicciones_RF_PM10.mean()
-    # Prediccion RL
-    prediccion_RN_PM10 = predicciones_RN_PM10.mean()
+    # Prediccion RL y conversion a float estandar
+    prediccion_RN_PM10 = np.mean(predicciones_RN_PM10).item()
 
     # Metricas RL
     mse_RL_PM10 = mean_squared_error(Y_PM10, predicciones_RL_PM10)
@@ -320,8 +321,8 @@ def analisis_calidad_aire():
     prediccion_RL_03_8h = predicciones_RL_03_8h.mean()
     # Prediccion RL
     prediccion_RF_03_8h = predicciones_RF_03_8h.mean()
-    # Prediccion RL
-    prediccion_RN_03_8h = predicciones_RN_03_8h.mean()
+    # Prediccion RL y conversion a float estandar
+    prediccion_RN_03_8h = np.mean(predicciones_RN_03_8h).item()
 
     # Metricas RL
     mse_RL_03_8h = mean_squared_error(Y_03_8h, predicciones_RL_03_8h)
@@ -380,8 +381,8 @@ def analisis_calidad_aire():
     prediccion_RL_NOX = predicciones_RL_NOX.mean()
     # Prediccion RL
     prediccion_RF_NOX = predicciones_RF_NOX.mean()
-    # Prediccion RL
-    prediccion_RN_NOX = predicciones_RN_NOX.mean()
+    # Prediccion RL y conversion a float estandar
+    prediccion_RN_NOX = np.mean(predicciones_RN_NOX).item()
 
     # Metricas RL
     mse_RL_NOX = mean_squared_error(Y_NOX, predicciones_RL_NOX)
@@ -423,7 +424,7 @@ def analisis_calidad_aire():
     # Añade el diccionario a un array
     config.array_dic_analisis_meteo_cal_aire.append(doc)
 
-    # Insercion calidad aire despues del analisis
+    # Insercion
     for doc in config.array_dic_analisis_meteo_cal_aire:
         # Actualiza el documento si existe '_id', si no inserta datos
-        bdd.coleccion_analisis_calidad_aire.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
+        bdd.coleccion_analisis_calidad_aire.update_one({'_id': doc['medida']}, {'$set': doc}, upsert=True)

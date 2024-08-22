@@ -35,7 +35,7 @@ array_estaciones = [] # Array que guarda las estaciones de euskalmet
 array_estaciones_unicos = [] # array_estaciones pero de valores unicos (snapshot mas reciente)
 diccionario_estaciones = dict() # Diccionario intermedio que guarda las estaciones de euskalmet
 array_sensores_por_estacion = [] # Array que guarda los sensores de cada estacion
-array_mediciones = [['measuresForAir','humidity'], ['measuresForAir','temperature'], ['measuresForAtmosphere','superficial_wetting'], ['measuresForAtmosphere','visibility'], ['measuresForWater','precipitation'], ['measuresForWind','mean_speed'], ['measuresForWind','direction_sigma']]
+array_mediciones = [['measuresForAir','humidity'], ['measuresForAir','temperature'], ['measuresForWater','precipitation'], ['measuresForWind','mean_speed'], ['measuresForWind','direction_sigma']]
 
 # Arrays con diccionarios
 array_dic_flows = [] # Array donde se almacenan los diccionarios que contienen datos de flows
@@ -46,9 +46,9 @@ array_dic_estaciones = [] # Array donde se almacenan los diccionarios que contie
 array_dic_datos_meteo = [] # Array donde se almacenan los diccionarios que contienen datos de euskalmet
 
 # Arrays con diccionarios despues del analisis
-array_dic_analisis_meteo_cal_aire = [] # Array donde se almacenan los diccionarios que contienen datos de la calidad del aire despues del analisis
 array_dic_analisis_incidencias = [] # Array donde se almacenan los diccionarios que contienen datos de las incidencias despues del analisis
 array_dic_analisis_datos_meteo = [] # Array donde se almacenan los diccionarios que contienen datos meteorologicos despues del analisis
+array_dic_analisis_meteo_cal_aire = [] # Array donde se almacenan los diccionarios que contienen datos meteorologicos despues del analisis
 
 # Iteradores
 contador_pags = 1
@@ -59,6 +59,7 @@ temporal = 0
 
 id_inc = 1
 id_met = 1
+contador_nombres_arrays = 0
 
 
 
