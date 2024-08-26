@@ -32,7 +32,7 @@ def analisis_flows():
     plt.show()
 
     plt.scatter(df_flows['vel_media'], np.zeros_like(df_flows['vel_media']), c=df_flows['vel_circulacion'], cmap='viridis')
-    plt.xlabel('Velocidad media de ciruculacion')
+    plt.xlabel('Velocidad media de circulacion')
     plt.title('Clusters')
     plt.yticks([])
     plt.show()

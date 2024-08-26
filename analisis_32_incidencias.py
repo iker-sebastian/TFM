@@ -21,7 +21,7 @@ def fechas_incompletas(fecha):
 # Metodo llamado desde analisis
 def analisis_incidencias():
     global df_incidencias
-    print(df_incidencias.head())
+    
     # Unificar nomenclatura provincias
     df_incidencias['province'] = df_incidencias['province'].replace('Alava-Araba', 'ARABA')
     df_incidencias['province'] = df_incidencias['province'].replace('Bizkaia', 'BIZKAIA')
@@ -53,5 +53,7 @@ def analisis_incidencias():
     # Merge de df_incidencias con df_group_by_date
     df_incidencias = df_incidencias.merge(df_group_by_date[['clave_union', 'nivel_incidencias']], on='clave_union', how='left')
 
+    # Convertir el df en diccionarios
+    data_inc = df_incidencias.to_dict("records")
     # Insercion incidencias despues del analisis
-    bdd.coleccion_analisis_incidencias.insert_many(df_incidencias.to_dict('records'))
+    bdd.coleccion_analisis_incidencias.insert_many(data_inc)
