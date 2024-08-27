@@ -1,6 +1,7 @@
 # Imports
 import bdd
 import pandas as pd
+import numpy as np
 import config
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -81,7 +82,7 @@ def analisis_meteo():
     # Prediccion RL
     prediccion_RF_humedad = predicciones_RF_humedad.mean()
     # Prediccion RL
-    prediccion_RN_humedad = predicciones_RN_humedad.mean()
+    prediccion_RN_humedad = np.mean(predicciones_RN_humedad).item()
 
     # Metricas RL
     mse_RL_humedad = mean_squared_error(Y_humedad, predicciones_RL_humedad)
@@ -142,7 +143,7 @@ def analisis_meteo():
     # Prediccion RL
     prediccion_RF_temperatura = predicciones_RF_temperatura.mean()
     # Prediccion RL
-    prediccion_RN_temperatura = predicciones_RN_temperatura.mean()
+    prediccion_RN_temperatura = np.mean(predicciones_RN_temperatura).item()
 
     # Metricas RL
     mse_RL_temperatura = mean_squared_error(Y_temperatura, predicciones_RL_temperatura)
@@ -203,7 +204,7 @@ def analisis_meteo():
     # Prediccion RL
     prediccion_RF_precipitaciones = predicciones_RF_precipitaciones.mean()
     # Prediccion RL
-    prediccion_RN_precipitaciones = predicciones_RN_precipitaciones.mean()
+    prediccion_RN_precipitaciones = np.mean(predicciones_RN_precipitaciones).item()
 
     # Metricas RL
     mse_RL_precipitaciones = mean_squared_error(Y_precipitaciones, predicciones_RL_precipitaciones)
@@ -262,7 +263,7 @@ def analisis_meteo():
     # Prediccion RL
     prediccion_RF_vel_media_viento = predicciones_RF_vel_media_viento.mean()
     # Prediccion RL
-    prediccion_RN_vel_media_viento = predicciones_RN_vel_media_viento.mean()
+    prediccion_RN_vel_media_viento = np.mean(predicciones_RN_vel_media_viento).item()
 
     # Metricas RL
     mse_RL_vel_media_viento = mean_squared_error(Y_vel_media_viento, predicciones_RL_vel_media_viento)
@@ -321,7 +322,7 @@ def analisis_meteo():
     # Prediccion RL
     prediccion_RF_direccion_viento = predicciones_RF_direccion_viento.mean()
     # Prediccion RL
-    prediccion_RN_direccion_viento = predicciones_RN_direccion_viento.mean()
+    prediccion_RN_direccion_viento = np.mean(predicciones_RN_direccion_viento).item()
 
     # Metricas RL
     mse_RL_direccion_viento = mean_squared_error(Y_direccion_viento, predicciones_RL_direccion_viento)
