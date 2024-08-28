@@ -67,13 +67,13 @@ for array in array_df:
     config.contador_nombres_arrays += 1
 
 # ------------------------------------- FLOWS ------------------------------------------ #
-analisis_10_flows.analisis_flows()
+#analisis_10_flows.analisis_flows()
 
 # ---------------------------------- CALIDAD AIRE -------------------------------------- #
 analisis_20_calidad_aire.analisis_calidad_aire()
 
 # ---------------------------------- INCIDENCIAS --------------------------------------- #
-analisis_32_incidencias.analisis_incidencias()
+#analisis_32_incidencias.analisis_incidencias()
 
 # ------------------------------------- METEO ------------------------------------------ #
-analisis_33_meteo.analisis_meteo()
+#analisis_33_meteo.analisis_meteo()

@@ -54,6 +54,6 @@ def analisis_incidencias():
     df_incidencias = df_incidencias.merge(df_group_by_date[['clave_union', 'nivel_incidencias']], on='clave_union', how='left')
 
     # Convertir el df en diccionarios
-    data_inc = df_incidencias.to_dict("records")
+    data_inc = df_incidencias.to_dict('records')
     # Insercion incidencias despues del analisis
     bdd.coleccion_analisis_incidencias.insert_many(data_inc)

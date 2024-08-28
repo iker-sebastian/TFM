@@ -62,6 +62,14 @@ def analisis_calidad_aire():
     # Rellenar valores nulos con 0 para prediccion
     df_group_by_date_clean = df_group_by_date.fillna(0)
 
+    # Convertir el DF a una lista de diccionarios
+    data_calidad_aire_limpio = df_group_by_date_clean.to_dict('records')
+    # Definir un _id
+    for elemento in data_calidad_aire_limpio:
+        elemento['_id'] = f"{elemento['provincia']}_{elemento['fecha']}"
+    # Insertar los datos en la colección
+    bdd.coleccion_calidad_aire_limpio.insert_many(data_calidad_aire_limpio)
+   
 
     # PREDICCION TOLUENO #
     # ------------------ #
