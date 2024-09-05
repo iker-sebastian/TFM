@@ -37,7 +37,7 @@ def API_datos(estacion, sensor, tipo_medida, medida, year, month, day):
             }
             # Añadir el diccionario a un array
             config.array_dic_datos_meteo.append(doc)
-            print(f'met_{config.id_met}')
+            #print(f'met_{config.id_met}')
             config.id_met += 1
         #else:
             # Se comenta el print por tema de tiempos de ejecucion

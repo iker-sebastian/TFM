@@ -51,11 +51,9 @@ array_dic_analisis_datos_meteo = [] # Array donde se almacenan los diccionarios 
 array_dic_analisis_meteo_cal_aire = [] # Array donde se almacenan los diccionarios que contienen datos meteorologicos despues del analisis
 
 # Iteradores
-contador_pags = 1
 num_pag_meter = 1
 num_pag_flows = 1
 intentos = 3
-temporal = 0
 
 id_inc = 1
 id_met = 1

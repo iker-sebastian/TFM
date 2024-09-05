@@ -42,8 +42,3 @@ def analisis_flows():
 
     for doc in data_10:
         bdd.coleccion_analisis_flows.update_one({'_id': doc['_id']}, {'$set': doc}, upsert=True)
-
-    # Insercion de datos para el analisis en MongoDB
-    # Actualiza el documento si existe '_id', si no inserta datos
-    
-    #bdd.coleccion_analisis_flows.insert_many(data_10)

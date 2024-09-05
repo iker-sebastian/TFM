@@ -21,7 +21,7 @@ def main():
     for year_month in config.array_year_month:
         # Recorrer todos los meterId
         for meterId in config.array_meterId_unicos:
-            print(meterId)
+            #print(meterId)
             # Llamada API y guardar datos en array
             config.num_pag_flows = _11_met_flows.API_flows_pags(meterId, year_month)
             
