@@ -86,9 +86,9 @@ def analisis_calidad_aire():
 
     # Prediccion RL
     prediccion_RL_Tolueno = predicciones_RL_Tolueno.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_Tolueno = predicciones_RF_Tolueno.mean()
-    # Prediccion RL y conversion a float estandar
+    # Prediccion RN y conversion a float estandar
     prediccion_RN_Tolueno = np.mean(predicciones_RN_Tolueno).item()
 
     # Metricas RL
@@ -147,9 +147,9 @@ def analisis_calidad_aire():
 
     # Prediccion RL
     prediccion_RL_SO2 = predicciones_RL_SO2.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_SO2 = predicciones_RF_SO2.mean()
-    # Prediccion RL y conversion a float estandar
+    # Prediccion RN y conversion a float estandar
     prediccion_RN_SO2 = np.mean(predicciones_RN_SO2).item()
 
     # Metricas RL
@@ -207,9 +207,9 @@ def analisis_calidad_aire():
 
     # Prediccion RL
     prediccion_RL_PM2_5 = predicciones_RL_PM2_5.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_PM2_5 = predicciones_RF_PM2_5.mean()
-    # Prediccion RL y conversion a float estandar
+    # Prediccion RN y conversion a float estandar
     prediccion_RN_PM2_5 = np.mean(predicciones_RN_PM2_5).item()
 
     # Metricas RL
@@ -267,9 +267,9 @@ def analisis_calidad_aire():
 
     # Prediccion RL
     prediccion_RL_PM10 = predicciones_RL_PM10.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_PM10 = predicciones_RF_PM10.mean()
-    # Prediccion RL y conversion a float estandar
+    # Prediccion RN y conversion a float estandar
     prediccion_RN_PM10 = np.mean(predicciones_RN_PM10).item()
 
     # Metricas RL
@@ -327,9 +327,9 @@ def analisis_calidad_aire():
 
     # Prediccion RL
     prediccion_RL_03_8h = predicciones_RL_03_8h.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_03_8h = predicciones_RF_03_8h.mean()
-    # Prediccion RL y conversion a float estandar
+    # Prediccion RN y conversion a float estandar
     prediccion_RN_03_8h = np.mean(predicciones_RN_03_8h).item()
 
     # Metricas RL
@@ -387,9 +387,9 @@ def analisis_calidad_aire():
 
     # Prediccion RL
     prediccion_RL_NOX = predicciones_RL_NOX.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_NOX = predicciones_RF_NOX.mean()
-    # Prediccion RL y conversion a float estandar
+    # Prediccion RN y conversion a float estandar
     prediccion_RN_NOX = np.mean(predicciones_RN_NOX).item()
 
     # Metricas RL

@@ -79,9 +79,9 @@ def analisis_meteo():
 
     # Prediccion RL
     prediccion_RL_humedad = predicciones_RL_humedad.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_humedad = predicciones_RF_humedad.mean()
-    # Prediccion RL
+    # Prediccion RN
     prediccion_RN_humedad = np.mean(predicciones_RN_humedad).item()
 
     # Metricas RL
@@ -140,9 +140,9 @@ def analisis_meteo():
 
     # Prediccion RL
     prediccion_RL_temperatura = predicciones_RL_temperatura.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_temperatura = predicciones_RF_temperatura.mean()
-    # Prediccion RL
+    # Prediccion RN
     prediccion_RN_temperatura = np.mean(predicciones_RN_temperatura).item()
 
     # Metricas RL
@@ -201,9 +201,9 @@ def analisis_meteo():
 
     # Prediccion RL
     prediccion_RL_precipitaciones = predicciones_RL_precipitaciones.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_precipitaciones = predicciones_RF_precipitaciones.mean()
-    # Prediccion RL
+    # Prediccion RN
     prediccion_RN_precipitaciones = np.mean(predicciones_RN_precipitaciones).item()
 
     # Metricas RL
@@ -260,9 +260,9 @@ def analisis_meteo():
 
     # Prediccion RL
     prediccion_RL_vel_media_viento = predicciones_RL_vel_media_viento.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_vel_media_viento = predicciones_RF_vel_media_viento.mean()
-    # Prediccion RL
+    # Prediccion RN
     prediccion_RN_vel_media_viento = np.mean(predicciones_RN_vel_media_viento).item()
 
     # Metricas RL
@@ -319,9 +319,9 @@ def analisis_meteo():
 
     # Prediccion RL
     prediccion_RL_direccion_viento = predicciones_RL_direccion_viento.mean()
-    # Prediccion RL
+    # Prediccion RF
     prediccion_RF_direccion_viento = predicciones_RF_direccion_viento.mean()
-    # Prediccion RL
+    # Prediccion RN
     prediccion_RN_direccion_viento = np.mean(predicciones_RN_direccion_viento).item()
 
     # Metricas RL
